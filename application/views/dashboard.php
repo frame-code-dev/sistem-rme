@@ -7,7 +7,7 @@
 		
 		<?php $this->load->view("template/_partials/topbar") ?>
 		<?php $this->load->view("template/_partials/sidebar") ?>
-
+	
 		<div class="p-4 sm:ml-64">
 			<div class="p-4 mt-14">
 				<div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-2 w-full mt-4">
@@ -96,8 +96,8 @@
 			</div>
 		</div>
     </body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+   
+	<?php $this->load->view("template/_partials/script") ?>
 	<script>
 		var options = {
 			series: [{

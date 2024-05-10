@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller
 		// $this->load->model('feedback_model');
 		
 		$data = [
-			"current_user" => 20,
+			"current_user" => $this->auth_model->current_user(),
 			// "article_count" => $this->article_model->count(),
 			// "feedback_count" => $this->feedback_model->count()
 		];
