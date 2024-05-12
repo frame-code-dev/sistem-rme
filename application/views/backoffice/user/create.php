@@ -84,6 +84,7 @@
 										<option value="dokter" >Dokter</option>
 										<option value="admin" >Admin</option>
 										<option value="perawat" >Perawat</option>
+										<option value="kepala" >Kepala Puskesmas</option>
 									</select>
 									<div class="text-red-500 text-xs italic font-semibold">
 										<?= form_error('role') ?>

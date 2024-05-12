@@ -85,6 +85,8 @@
 										<option value="dokter" <?=$user->role == "dokter" ? "selected" : "" ?>>Dokter</option>
 										<option value="admin" <?=$user->role == "admin" ? "selected" : "" ?>>Admin</option>
 										<option value="perawat" <?=$user->role == "perawat" ? "selected" : "" ?>>Perawat</option>
+										<option value="kepala" <?=$user->role == "kepala" ? "selected" : "" ?> >Kepala Puskesmas</option>
+
 									</select>
 									<div class="text-red-500 text-xs italic font-semibold">
 										<?= form_error('role') ?>
