@@ -75,6 +75,7 @@ $route['obat/delete/(:any)'] = 'obat/delete/$1';
 $route['pasien'] = 'pasien/index';
 $route['pasien/create'] = 'pasien/create';
 $route['pasien/store'] = 'pasien/store';
+$route['pasienlist'] = 'pasien/list';
 // Nomor Antrian 
 $route['nomor_antrian'] = 'nomor_antrian/index';
 

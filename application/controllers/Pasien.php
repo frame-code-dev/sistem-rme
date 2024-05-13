@@ -25,6 +25,15 @@ class Pasien extends CI_Controller
 		$this->load->view('backoffice/pasien/index', $data);
 	}
 
+	public function list()
+	{
+		$data['current_user'] = $this->auth_model->current_user();
+		$pasien = $this->Pasien_model->getAll();
+		$data['data'] = $pasien;
+		$data['title'] = 'Data Pasien';
+		$this->load->view('backoffice/pasien/list', $data);
+	}
+
 	public function create() {
 		$data['title'] = 'Tambah Pasien';
 		$data['current_page'] = 'List Pendaftaran';
