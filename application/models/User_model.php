@@ -85,7 +85,7 @@ class User_model extends CI_Model
         $this->nama = $post["nama"];
         $this->username = $post["username"];
         $this->role = $post["role"];
-		$this->created_at = now('Y-m-d H:i:s');
+		$this->created_at = date('Y-m-d H:i:s');
         $this->password = password_hash($post["password"], PASSWORD_DEFAULT);
         return $this->db->insert($this->_table, $this);
     }

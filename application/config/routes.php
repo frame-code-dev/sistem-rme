@@ -63,6 +63,13 @@ $route['user/store'] = 'user/store';
 $route['user/edit/(:any)'] = 'user/edit/$1';
 $route['user/update/(:any)'] = 'user/update/$1';
 $route['user/delete/(:any)'] = 'user/delete/$1';
+// obat 
+$route['obat'] = 'obat/index';
+$route['obat/create'] = 'obat/create';
+$route['obat/store'] = 'obat/store';
+$route['obat/edit/(:any)'] = 'obat/edit/$1';
+$route['obat/update/(:any)'] = 'obat/update/$1';
+$route['obat/delete/(:any)'] = 'obat/delete/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

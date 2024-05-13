@@ -31,6 +31,7 @@ class User extends CI_Controller
 	{
 		$data['title'] = 'Tambah User';
 		$data['current_page'] = 'List User';
+		$data['current_user'] = $this->auth_model->current_user();
 		$this->load->view('backoffice/user/create', $data);
 	}
 
@@ -56,6 +57,7 @@ class User extends CI_Controller
 
 		$data['title'] = 'Edit User';
 		$data['current_page'] = 'List User';
+		$data['current_user'] = $this->auth_model->current_user();
 		$data['user'] = $this->User_model->getById($id);
 		if (!$data['user']) show_404();
 
