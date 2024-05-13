@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2024 at 06:33 AM
+-- Generation Time: May 13, 2024 at 08:41 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,67 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_rme`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `obat`
+--
+
+CREATE TABLE `obat` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `stok` bigint(20) NOT NULL,
+  `dosis` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`id`, `name`, `stok`, `dosis`, `created_at`, `updated_at`) VALUES
+(1, 'Paracetamol', 100, '2xmakan', '2024-05-13 03:14:36', '2024-05-13 03:19:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pasien`
+--
+
+CREATE TABLE `pasien` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `no_rm` varchar(255) NOT NULL,
+  `nik` varchar(255) DEFAULT NULL,
+  `no_kk` varchar(255) DEFAULT NULL,
+  `jenis_pasien` enum('bpjs','umum') NOT NULL,
+  `no_jkn` varchar(255) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `jenis_kelamin` enum('l','p') DEFAULT NULL,
+  `agama` varchar(255) DEFAULT NULL,
+  `no_hp` varchar(255) DEFAULT NULL,
+  `no_telp` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `pendidikan` varchar(255) DEFAULT NULL,
+  `pekerjaan` varchar(255) DEFAULT NULL,
+  `status_pernikahan` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `nomor_antrian` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`id`, `name`, `no_rm`, `nik`, `no_kk`, `jenis_pasien`, `no_jkn`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `no_hp`, `no_telp`, `alamat`, `pendidikan`, `pekerjaan`, `status_pernikahan`, `user_id`, `nomor_antrian`, `created_at`, `updated_at`) VALUES
+(2, 'Rifjan', '000001', '3574042905000001', '3574041505080026', 'bpjs', '12412', '1970-01-01', 'l', 'hindu', '083846997665', '0912513', 'qwrqr', 'sltp', 'Mahasiswa', '1', 0, 1, '2024-05-13 12:30:50', NULL),
+(4, 'qwtq', '000002', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, NULL, '2024-05-13 13:04:28', NULL),
+(5, 'qwtq', '000003', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, NULL, '2024-05-13 13:06:51', NULL),
+(6, 'Rifjan', '000004', '3574042905000003', '3574041505080026', 'umum', '', '1970-01-01', 'l', 'kristen', '083846997665', '089516235685', 'afasf', 'slta', 'Petani', '1', 0, 2, '2024-05-13 13:12:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -50,6 +111,18 @@ INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`, `created_at`,
 --
 
 --
+-- Indexes for table `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pasien`
+--
+ALTER TABLE `pasien`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -58,6 +131,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `obat`
+--
+ALTER TABLE `obat`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pasien`
+--
+ALTER TABLE `pasien`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
