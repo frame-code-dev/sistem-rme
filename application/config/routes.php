@@ -71,5 +71,12 @@ $route['obat/edit/(:any)'] = 'obat/edit/$1';
 $route['obat/update/(:any)'] = 'obat/update/$1';
 $route['obat/delete/(:any)'] = 'obat/delete/$1';
 
+//Pasien 
+$route['pasien'] = 'pasien/index';
+$route['pasien/create'] = 'pasien/create';
+$route['pasien/store'] = 'pasien/store';
+// Nomor Antrian 
+$route['nomor_antrian'] = 'nomor_antrian/index';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
