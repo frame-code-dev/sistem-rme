@@ -17,16 +17,29 @@ class Pemeriksaan extends CI_Controller
 		}
 	}
 
-	public function index()
+	public function index() : void
 	{
 		$data['current_user'] = $this->auth_model->current_user();
-		$antrian = $this->Pasien_model->getAntrian();
+		$antrian = $this->Pasien_model->getAntrean();
 		$data['data'] = $antrian;
-		$data['title'] = 'Data Pemeriksaan';
+		$data['title'] = 'Dashboard';
+        $data['total_antrean'] = $this->Pasien_model->getTotalAntrean();
+        $data['total_diperiksa'] = $this->Pasien_model->getTotalPasienDiperiksa();
+        $data['total_pasien_today'] = $this->Pasien_model->getTotalPasienToday();
+
 		$this->load->view('backoffice/pemeriksaan/index', $data);
 	}
+    
+    public function list() : void
+    {
+        $data['current_user'] = $this->auth_model->current_user();
+		$antrian = $this->Pasien_model->getAntrean();
+		$data['data'] = $antrian;
+		$data['title'] = 'Data Pemeriksaan';
+		$this->load->view('backoffice/pemeriksaan/list', $data);
+    }
 
-    public function create($id = null)
+    public function create($id = null) : void
     {
         if (!isset($id)) redirect('pemeriksaan');
 
@@ -39,7 +52,7 @@ class Pemeriksaan extends CI_Controller
 		$this->load->view('backoffice/pemeriksaan/create', $data);
     }
 
-    public function store()
+    public function store() : void
     {
         $data['title'] = 'Pemeriksaan';
 		$data['current_page'] = 'List Pemeriksaan';
@@ -51,7 +64,7 @@ class Pemeriksaan extends CI_Controller
         if ($validation->run()) {
             $pemeriksaan->save();
             $this->session->set_flashdata('message', 'Berhasil melakukan pemeriksaan.');
-			redirect('pemeriksaan/index');
+			redirect('pemeriksaan/list');
         }
         else {
             $data['pasien'] = $this->Pasien_model->getById($this->input->post()['pasien_id']);

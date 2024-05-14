@@ -81,6 +81,7 @@ $route['nomor_antrian'] = 'nomor_antrian/index';
 
 // Pemeriksaan
 $route['pemeriksaan'] = 'pemeriksaan/index';
+$route['pemeriksaan/list'] = 'pemeriksaan/list';
 $route['pemeriksaan/create/(:any)'] = 'pemeriksaan/create/$1';
 $route['pemeriksaan/store'] = 'pemeriksaan/store';
 

@@ -115,7 +115,7 @@ class Pasien_model extends CI_Model
         return $this->db->get($this->_table)->result();
     }
 
-	public function getAntrian(){
+	public function getAntrean(){
 		$this->db->from($this->_table);
 		$this->db->where('id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)');
 		$this->db->order_by('created_at', 'desc');
@@ -123,6 +123,25 @@ class Pasien_model extends CI_Model
 		
 		return $query->result();
     }
+
+	public function getTotalAntrean() : int
+	{
+		$query = $this->db->query("SELECT * FROM $this->_table WHERE id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)");
+		return (int) $query->num_rows();
+	}
+
+	public function getTotalPasienDiperiksa() : int
+	{
+		$query = $this->db->query("SELECT * FROM $this->_table WHERE id IN (SELECT pasien_id FROM pemeriksaan_pasien)");
+		return (int) $query->num_rows();
+	}
+
+	public function getTotalPasienToday() : int
+	{
+		$today = date('Y-m-d');
+		$query = $this->db->query("SELECT * FROM $this->_table WHERE date(created_at) = '$today'");
+		return (int) $query->num_rows();
+	}
 
 	public function getById($id)
     {
