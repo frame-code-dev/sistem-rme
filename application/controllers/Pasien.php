@@ -69,4 +69,44 @@ class Pasien extends CI_Controller
 			$this->load->view('backoffice/pasien/create', $data);
 		}
 	}
+
+	public function edit($id) {
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = 'Edit Pasien';
+		$data['current_page'] = 'List Pasien';
+
+		$data['data'] = $this->Pasien_model->getById($id);
+		$this->load->view('backoffice/pasien/edit', $data);
+	}
+
+	public function update($id = null)
+    {
+        if (!isset($id)) redirect('pasien');
+       
+        $pasien = $this->Pasien_model;
+        $validation = $this->form_validation;
+        $validation->set_rules($pasien->rules());
+
+        if ($validation->run()) {
+            $pasien->updateData($id);
+            $this->session->set_flashdata('message', 'Berhasil mengganti data');
+			redirect('pasien');
+        }else{
+			$data['title'] = 'Edit Pasien';
+			$data['current_page'] = 'List Pasien';
+			$data["data"] = $pasien->getById($id);
+			
+			$this->load->view("backoffice/pasien/edit", $data);
+		}
+    }
+
+	public function delete($id = null) {
+		if (!isset($id)) redirect('pasien');
+		$pasien = $this->Pasien_model;
+		$pasien->delete($id);
+		$this->session->set_flashdata('message', 'Berhasil menghapus data');
+		redirect('pasien');
+	}
+
+
 }

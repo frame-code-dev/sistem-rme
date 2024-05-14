@@ -150,6 +150,8 @@ class Pasien_model extends CI_Model
 
 	public function save() {
 		$post = $this->input->post();
+		$date = DateTime::createFromFormat('m-d-Y', $post["tgl_lahir"])->format('Y-m-d');
+
         $this->db->insert($this->_table,[
 			'name' => $post["nama_pasien"],
 			'no_rm' => $post["no_rm"],
@@ -157,7 +159,7 @@ class Pasien_model extends CI_Model
 			'no_kk' => $post["no_kk"],
 			'jenis_pasien' => $post["jenis_pasien"],
 			'no_jkn' => $post["no_kartu_jkn"],
-			'tanggal_lahir' => date('Y-m-d', strtotime($post["tgl_lahir"])),
+			'tanggal_lahir' => $date,
 			'jenis_kelamin' => $post["jenis_kelamin"],
 			'agama' => $post["agama"],
 			'no_hp' => $post["no_hp"],
@@ -172,6 +174,45 @@ class Pasien_model extends CI_Model
 		]);
 		return $this->db->insert_id();
 	}
+
+	public function updateData($id){
+		$post = $this->input->post();
+		$date = DateTime::createFromFormat('m-d-Y', $post["tgl_lahir"])->format('Y-m-d');
+		$this->db->update($this->_table, [
+			'name' => $post["nama_pasien"],
+			'no_rm' => $post["no_rm"],
+			'nik' => $post["nik"],
+			'no_kk' => $post["no_kk"],
+			'jenis_pasien' => $post["jenis_pasien"],
+			'no_jkn' => $post["no_kartu_jkn"],
+			'tanggal_lahir' => $date,
+			'jenis_kelamin' => $post["jenis_kelamin"],
+			'agama' => $post["agama"],
+			'no_hp' => $post["no_hp"],
+			'no_telp' => $post["no_telp"],
+			'alamat' => $post["alamat"],
+			'pendidikan' => $post["pendidikan"],
+			'pekerjaan' => $post["pekerjaan"],
+			'status_pernikahan' => $post["status_kawin"],
+			'user_id' => $this->session->userdata('user_id'),
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')
+		], array('id' => $id));
+	}
+
+	public function updateDataAntrian($id){
+		$post = $this->input->post();
+		$this->db->update($this->_table, [
+			'nomor_antrian' => $post['nomor_antrian'],
+			'created_at' => date('Y-m-d H:i:s'),
+		], array('id' => $id));
+	}
+
+	public function delete($id)
+    {
+        return $this->db->delete($this->_table, array("id" => $id));
+    }
+
 
 	public function get_nomor_antrian() {
 

@@ -75,9 +75,13 @@ $route['obat/delete/(:any)'] = 'obat/delete/$1';
 $route['pasien'] = 'pasien/index';
 $route['pasien/create'] = 'pasien/create';
 $route['pasien/store'] = 'pasien/store';
+$route['pasien/edit/(:any)'] = 'pasien/edit/$1';
+$route['pasien/update/(:any)'] = 'pasien/update/$1';
 $route['pasienlist'] = 'pasien/list';
 // Nomor Antrian 
 $route['nomor_antrian'] = 'nomor_antrian/index';
+$route['nomor_antrian/daftar-pasien-lama/(:any)'] = 'nomor_antrian/daftar_pasien_lama/$1';
+$route['nomor_antrian/updateno/(:any)'] = 'nomor_antrian/updateNo/$1';
 
 // Pemeriksaan
 $route['pemeriksaan'] = 'pemeriksaan/index';

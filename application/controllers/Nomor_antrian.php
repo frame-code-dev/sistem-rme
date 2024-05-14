@@ -31,4 +31,30 @@ class Nomor_antrian extends CI_Controller {
 		$data['nomor_antrian_hari_ini'] = $this->Pasien_model->getById($id)->nomor_antrian;
 		$this->load->view('backoffice/nomor_antrian/cetak', $data);
 	}
+	public function cetak_kib($id) {
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['data'] = $this->Pasien_model->getById($id);
+		$this->load->view('backoffice/nomor_antrian/cetak_kib', $data);
+	}
+
+	public function daftar_pasien_lama($id) {
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = 'Pendaftaran Pasien Lama';
+		$data['current_page'] = 'List Pasien';
+
+		$data['data'] = $this->Pasien_model->getById($id);
+		$no_antrian = $this->Pasien_model->get_nomor_antrian();
+		$data['no_antrian'] = $no_antrian;
+		$this->load->view('backoffice/pasien/pendaftaran_pasien_lama', $data);
+	}
+
+	public function updateNo($id) {
+		
+		$data['current_user'] = $this->auth_model->current_user();
+		// Menampilkan nomor urutan baru
+		$update = $this->Pasien_model;
+		$update->updateDataAntrian($id);
+		$this->session->set_flashdata('message', 'Berhasil mendaftarkan.');
+		redirect('nomor_antrian/index/' . $id);
+	}
 }
