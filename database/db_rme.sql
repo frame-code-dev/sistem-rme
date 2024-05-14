@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 08:41 PM
+-- Generation Time: May 14, 2024 at 03:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -85,6 +85,77 @@ INSERT INTO `pasien` (`id`, `name`, `no_rm`, `nik`, `no_kk`, `jenis_pasien`, `no
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pemeriksaan_pasien﻿`
+--
+
+CREATE TABLE `pemeriksaan_pasien﻿` (
+  `id` bigint(20) NOT NULL,
+  `pasien_id﻿` bigint(20) NOT NULL,
+  `keluhan_utama﻿` text NOT NULL,
+  `riwayat_penyakit_sekarang﻿` text NOT NULL,
+  `riwayat_penyakit_dahulu﻿` text NOT NULL,
+  `riwayat_pengobatan﻿` text NOT NULL,
+  `tekanan﻿_darah` bigint(20) NOT NULL,
+  `nadi` bigint(20) NOT NULL,
+  `suhu﻿` bigint(20) NOT NULL,
+  `rr﻿` bigint(20) NOT NULL,
+  `tinggi_badan﻿` bigint(20) NOT NULL,
+  `berat_badan﻿` bigint(20) NOT NULL,
+  `status_pemeriksaan﻿` enum('pending','sukses','batal') NOT NULL,
+  `user_id﻿` bigint(20) NOT NULL,
+  `created_at﻿` timestamp NULL DEFAULT NULL,
+  `updated_at﻿` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rekam_medis`
+--
+
+CREATE TABLE `rekam_medis` (
+  `id` bigint(20) NOT NULL,
+  `pemeriksaan_id` bigint(20) NOT NULL,
+  `diganosa_utama_code` varchar(255) NOT NULL,
+  `diganosa_utama_name` text NOT NULL,
+  `catatan` text DEFAULT NULL,
+  `created_at﻿` timestamp NULL DEFAULT NULL,
+  `updated_at﻿` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rekam_medis_diagnosa`
+--
+
+CREATE TABLE `rekam_medis_diagnosa` (
+  `id` bigint(20) NOT NULL,
+  `rekam_medis_id﻿` bigint(20) NOT NULL,
+  `diagnosa_sekunder_code` varchar(255) NOT NULL,
+  `diagnosa_sekunder_name` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rekam_medis_obat`
+--
+
+CREATE TABLE `rekam_medis_obat` (
+  `id` bigint(20) NOT NULL,
+  `rekam_medis_id﻿` bigint(20) NOT NULL,
+  `obat_id` bigint(20) NOT NULL,
+  `qty` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -123,6 +194,30 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pemeriksaan_pasien﻿`
+--
+ALTER TABLE `pemeriksaan_pasien﻿`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rekam_medis`
+--
+ALTER TABLE `rekam_medis`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rekam_medis_diagnosa`
+--
+ALTER TABLE `rekam_medis_diagnosa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rekam_medis_obat`
+--
+ALTER TABLE `rekam_medis_obat`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -143,6 +238,30 @@ ALTER TABLE `obat`
 --
 ALTER TABLE `pasien`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `pemeriksaan_pasien﻿`
+--
+ALTER TABLE `pemeriksaan_pasien﻿`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rekam_medis`
+--
+ALTER TABLE `rekam_medis`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rekam_medis_diagnosa`
+--
+ALTER TABLE `rekam_medis_diagnosa`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rekam_medis_obat`
+--
+ALTER TABLE `rekam_medis_obat`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
