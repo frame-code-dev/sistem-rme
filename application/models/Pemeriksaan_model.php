@@ -86,12 +86,6 @@ class Pemeriksaan_model extends CI_Model
 				'label' => 'Berat Badan',
 				'rules' => 'required'
 				
-			],
-			[
-				'field' => 'status_pemeriksaan',
-				'label' => 'Status Pemeriksaan',
-				'rules' => 'required'
-				
 			]
         ];
     }
@@ -125,7 +119,7 @@ class Pemeriksaan_model extends CI_Model
 			'rr' => $post["rr"],
 			'tinggi_badan' => $post["tinggi_badan"],
 			'berat_badan' => $post["berat_badan"],
-			'status_pemeriksaan' => $post["status_pemeriksaan"],
+			'status_pemeriksaan' => 'pending',
 			'user_id' => $this->session->userdata('user_id'),
 			'created_at' => date('Y-m-d H:i:s'),
 		]);
