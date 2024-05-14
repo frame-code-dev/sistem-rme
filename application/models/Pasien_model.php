@@ -115,6 +115,15 @@ class Pasien_model extends CI_Model
         return $this->db->get($this->_table)->result();
     }
 
+	public function getAntrian(){
+		$this->db->from($this->_table);
+		$this->db->where('id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)');
+		$this->db->order_by('created_at', 'desc');
+		$query = $this->db->get();
+		
+		return $query->result();
+    }
+
 	public function getById($id)
     {
         return $this->db->get_where($this->_table, ["id" => $id])->row();

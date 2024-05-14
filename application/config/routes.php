@@ -79,5 +79,10 @@ $route['pasienlist'] = 'pasien/list';
 // Nomor Antrian 
 $route['nomor_antrian'] = 'nomor_antrian/index';
 
+// Pemeriksaan
+$route['pemeriksaan'] = 'pemeriksaan/index';
+$route['pemeriksaan/create/(:any)'] = 'pemeriksaan/create/$1';
+$route['pemeriksaan/store'] = 'pemeriksaan/store';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
