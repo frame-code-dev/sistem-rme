@@ -89,5 +89,10 @@ $route['pemeriksaan/list'] = 'pemeriksaan/list';
 $route['pemeriksaan/create/(:any)'] = 'pemeriksaan/create/$1';
 $route['pemeriksaan/store'] = 'pemeriksaan/store';
 
+// Rekam Medis 
+$route['rekam-medis'] = 'rekammedis/index';
+$route['rekam-medis/create/(:any)'] = 'rekammedis/create/$1';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
