@@ -91,7 +91,7 @@ class Pemeriksaan_model extends CI_Model
     }
 
 	public function getAll(){
-		$this->db->from('pemeriksaan_pasien');
+		$this->db->from($this->_table);
 		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
 		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pemeriksaan_pasien.*');
 		$this->db->order_by('pemeriksaan_pasien.created_at', 'desc');
@@ -104,6 +104,40 @@ class Pemeriksaan_model extends CI_Model
     {
         return $this->db->get_where($this->_table, ["id" => $id])->row();
     }
+
+	public function getByStatus($status=null, $filter=null) {
+		$this->db->from($this->_table);
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+
+			// jenis kelamin where clause
+			$jenis_kelamin = property_exists($filter, 'jenis_kelamin') ? strtolower($filter->jenis_kelamin) : null;
+			if ($jenis_kelamin)
+				$this->db->where("pasien.jenis_kelamin = '$jenis_kelamin'");
+			
+			// jenis pasien where clause
+			$jenis_pasien = property_exists($filter, 'jenis_pasien') ? strtolower($filter->jenis_pasien) : null;
+			if ($jenis_pasien)
+				$this->db->where("pasien.jenis_pasien = '$jenis_pasien'");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+
+		return $query->result();
+	}
 
 	public function save() {
 		$post = $this->input->post();

@@ -93,6 +93,8 @@ $route['pemeriksaan/store'] = 'pemeriksaan/store';
 $route['rekam-medis'] = 'rekammedis/index';
 $route['rekam-medis/create/(:any)'] = 'rekammedis/create/$1';
 
+// Laporan
+$route['laporan/kunjungan'] = 'laporan/kunjungan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
