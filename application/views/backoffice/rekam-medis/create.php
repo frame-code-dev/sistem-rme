@@ -167,13 +167,14 @@
 							<h4 class="font-bold text-sm">Diagnosa</h4>
 							<hr>
 						</div>
-						<form action="" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+						<form action="<?=base_url('rekam-medis/store/'.$data->id)?>" class="w-full mx-auto space-y-4" method="POST" enctype="multipart/form-data">
+							<input type="text" name="pemeriksaan_id" value="<?=$data->id?>" hidden>
 							<div class="grid grid-cols-2 gap-3">
 								<div class="col-span-2">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kode Diagnosa<span class="me-2 text-red-500">*</span></label>
-									<input type="text"  placeholder="Masukkan Kode Diagnosa" name="diagnosa_utama_code" onkeyup="getDiagnosis()" id="diagnosa_utama_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<input type="text"  placeholder="Masukkan Kode Diagnosa" name="diganosa_utama_code" onkeyup="getDiagnosis()" id="diagnosa_utama_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('diagnosa_utama_code') ?>
+										<?= form_error('diganosa_utama_code') ?>
 									</div>
 									<div id="loadingMessage" class="text-blue-500 text-xs italic font-semibold" style="display: none;">
 										Data sedang dimuat...
@@ -181,13 +182,17 @@
 								</div>
 								<div class="col-span-2">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Deskripsi Diagnosa<span class="me-2 text-red-500">*</span></label>
-									<input type="text"  placeholder="Masukkan Deskripsi Diagnosa" name="diagnosa_utama_name" id="diagnosa_utama_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<input type="text"  placeholder="Masukkan Deskripsi Diagnosa" name="diganosa_utama_name" id="diagnosa_utama_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('diagnosa_utama_name') ?>
+										<?= form_error('diganosa_utama_name') ?>
 									</div>
 								</div>
 								<div class="col-span-2">
-									<div class="flex justify-between w-full bg-gray-100 p-3 rounded-md mb-5">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Catatan Lain</label>
+									<textarea id="message" rows="4" name="catatan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+								</div>
+								<div class="col-span-2">
+									<div class="flex justify-between w-full bg-gray-100 p-3 rounded-md">
 										<div>
 											<h4 class="font-bold text-sm">Diagnosa Sekunder</h4>
 											<hr>
@@ -202,14 +207,64 @@
 											</button>
 										</div>
 									</div>
+									<div id="panel_fields" class="p-3 border">
+	
+									</div>
 								</div>
 								<div class="col-span-2">
-									<div id="panel_fields" class="border p-5"></div>
-
+									<div class="flex justify-between w-full bg-gray-100 p-3 rounded-md mb-5">
+										<div>
+											<h4 class="font-bold text-sm">Resep Obat</h4>
+											<hr>
+										</div>
+										<div>
+											<button type="button" 
+													class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+													id="addBtn">
+												<svg class="w-3.5 h-3.5 me-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+													<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+												</svg>
+												Tambah
+											
+											</button>
+										</div>
+									</div>
+									<div id="formContainer">
+										<div class="row form-row my-3 grid grid-cols-4 content-center gap-3">
+											<div class="form-group col-md-4">
+												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Obat<span class="me-2 text-red-500">*</span></label>
+												<select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 obat-select" name="obat[]" required>
+													<option value="">Pilih Obat</option>
+													<?php foreach ($obat as $item): ?>
+														<option value="<?= $item->id ?>"><?= $item->name ?></option>
+													<?php endforeach; ?>
+												
+												</select>
+											</div>
+											<div class="form-group col-md-3">
+												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Frekuensi Obat<span class="me-2 text-red-500">*</span></label>
+												<input type="text" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" name="frekuensi[]">
+											</div>
+											<div class="form-group col-md-3">
+												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Qty<span class="me-2 text-red-500">*</span></label>
+												<input type="number" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 qty-input" name="qty[]" required min="1">
+											</div>
+											<div class="form-group col-md-2 flex align-bottom content-end items-end">
+												<button type="button" class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 remove-btn">Hapus</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
+								<div>
+									<button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Simpan</button>
+								</div>
+								<div>
+									<button class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" type="reset">Batal</button>
+								</div>
 
+							</div>
 						</form>
 					</div>
 				</section>
@@ -217,6 +272,59 @@
 		</div>
 	</body>
 	<?php $this->load->view("template/_partials/script") ?>
+	<script>
+        $(document).ready(function() {
+            // Menambahkan form dinamis ketika tombol "Add Form" ditekan
+            $('#addBtn').click(function() {
+                var formRow = `
+							<div class="row form-row my-3 grid grid-cols-4 content-center gap-3">
+								<div class="form-group col-md-4">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Obat<span class="me-2 text-red-500">*</span></label>
+									<select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 obat-select" name="obat[]" required>
+										<option value="">Pilih Obat</option>
+									</select>
+								</div>
+								<div class="form-group col-md-3">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Frekuensi Obat<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" name="frekuensi[]">
+								</div>
+								<div class="form-group col-md-3">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Qty<span class="me-2 text-red-500">*</span></label>
+									<input type="number" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 qty-input" name="qty[]" required min="1">
+								</div>
+								<div class="form-group col-md-2 flex align-bottom content-end items-end">
+									<button type="button" class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 remove-btn">Hapus</button>
+								</div>
+							</div>
+                `;
+
+                $('#formContainer').append(formRow);
+
+                // Mendapatkan data obat dan mengisi dropdown di form baru
+				let url = `<?=base_url('rekam-medis/data-obat')?>`
+                $.ajax({
+                    url: url,
+					dataType: 'json',
+					success: function(response) {
+						console.log(response);
+						var obatSelect = $('.obat-select:last');
+						obatSelect.empty();
+						obatSelect.append('<option value="">Pilih Obat</option>');
+
+						$.each(response, function(key, value) {
+							obatSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+						});
+					}
+                });
+            });
+
+            // Menghapus form ketika tombol "Remove" ditekan
+            $(document).on('click', '.remove-btn', function() {
+                $(this).closest('.form-row').remove();
+            });
+
+        });
+    </script>
 	<script>
 		function getDiagnosis(){
 			var getCode = document.getElementById('diagnosa_utama_code').value;

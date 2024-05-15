@@ -2,8 +2,9 @@
 
 class Rekam_model extends CI_Model
 {
-   private $_table = "rekam_medis";
-
+	private $_table = "rekam_medis";
+	private $_table_rekam_medis_diagnosa = 'rekam_medis_diagnosa';
+	private $_table_rekam_medis_obat = 'rekam_medis_obat';
    	public function getAll(){
 		$this->db->from('pemeriksaan_pasien');
 		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
@@ -24,5 +25,45 @@ class Rekam_model extends CI_Model
 		$this->db->order_by('pemeriksaan_pasien.created_at', 'desc');
 		$query = $this->db->get(); // Add get() to execute the query
 		return $query->row(); // Fetch a single row
+	}
+
+	public function save()
+    {
+        $post = $this->input->post();
+		// rekam_medis
+        $this->db->insert($this->_table, [
+			'pemeriksaan_id' => $post['pemeriksaan_id'],
+			'diganosa_utama_code' => $post['diganosa_utama_code'],
+			'diganosa_utama_name' => $post['diganosa_utama_name'],
+			'catatan' => $post['catatan'],
+			'created_at' => now(),
+		]);
+		$id = $this->db->insert_id();
+		for ($i=0; $i < count($this->input->post('code_diagnosis_other')) ; $i++) { 
+			$this->db->insert($this->_table_rekam_medis_diagnosa,[
+				'rekam_medis_id' => $id,
+				'diagnosa_sekunder_code' => $this->input->post('code_diagnosis_other')[$i],
+				'diagnosa_sekunder_name' => $this->input->post('description_diagnosis_other')[$i],	
+				'created_at' => now(),
+
+			]);
+		};
+		for ($i=0; $i < count($post['obat']) ; $i++) { 
+			$this->db->insert($this->_table_rekam_medis_obat,[
+				'rekam_medis_id' => $id,
+				'obat_id' => $post['obat'][$i],
+				'frekuensi' => $post['frekuensi'][$i],	
+				'qty' => $post['qty'][$i],
+				'created_at' => now(),
+			]);
+		};
+    }
+
+	public function is_diagnosis_exists($id) {
+		$this->db->where('id', $id);
+        $query = $this->db->get($this->_table_rekam_medis_diagnosa);
+
+        // Check if there is any row returned
+        return $query->num_rows() > 0;
 	}
 }

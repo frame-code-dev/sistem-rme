@@ -92,6 +92,8 @@ $route['pemeriksaan/store'] = 'pemeriksaan/store';
 // Rekam Medis 
 $route['rekam-medis'] = 'rekammedis/index';
 $route['rekam-medis/create/(:any)'] = 'rekammedis/create/$1';
+$route['rekam-medis/data-obat'] = 'rekammedis/dataobat';
+$route['rekam-medis/store/(:any)'] = 'rekammedis/store/$1';
 
 // Laporan
 $route['laporan/kunjungan'] = 'laporan/kunjungan';
