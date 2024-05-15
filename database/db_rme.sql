@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 03:43 AM
+-- Generation Time: May 15, 2024 at 07:28 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -77,35 +77,42 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`id`, `name`, `no_rm`, `nik`, `no_kk`, `jenis_pasien`, `no_jkn`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `no_hp`, `no_telp`, `alamat`, `pendidikan`, `pekerjaan`, `status_pernikahan`, `user_id`, `nomor_antrian`, `created_at`, `updated_at`) VALUES
-(2, 'Rifjan', '000001', '3574042905000001', '3574041505080026', 'bpjs', '12412', '1970-01-01', 'l', 'hindu', '083846997665', '0912513', 'qwrqr', 'sltp', 'Mahasiswa', '1', 0, 1, '2024-05-13 12:30:50', NULL),
-(4, 'qwtq', '000002', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, NULL, '2024-05-13 13:04:28', NULL),
+(2, 'Rifjan', '000001', '3574042905000001', '3574041505080026', 'bpjs', '12412', '2024-05-07', 'l', 'hindu', '083846997665', '0912513', 'qwrqr', 'sltp', 'Mahasiswa', '1', 0, 1, '2024-05-14 12:30:50', NULL),
+(4, 'qwtq', '000002', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, 2, '2024-05-14 04:55:00', NULL),
 (5, 'qwtq', '000003', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, NULL, '2024-05-13 13:06:51', NULL),
 (6, 'Rifjan', '000004', '3574042905000003', '3574041505080026', 'umum', '', '1970-01-01', 'l', 'kristen', '083846997665', '089516235685', 'afasf', 'slta', 'Petani', '1', 0, 2, '2024-05-13 13:12:44', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemeriksaan_pasien﻿`
+-- Table structure for table `pemeriksaan_pasien`
 --
 
-CREATE TABLE `pemeriksaan_pasien﻿` (
+CREATE TABLE `pemeriksaan_pasien` (
   `id` bigint(20) NOT NULL,
-  `pasien_id﻿` bigint(20) NOT NULL,
-  `keluhan_utama﻿` text NOT NULL,
-  `riwayat_penyakit_sekarang﻿` text NOT NULL,
-  `riwayat_penyakit_dahulu﻿` text NOT NULL,
-  `riwayat_pengobatan﻿` text NOT NULL,
-  `tekanan﻿_darah` bigint(20) NOT NULL,
+  `pasien_id` bigint(20) NOT NULL,
+  `keluhan_utama` text NOT NULL,
+  `riwayat_penyakit_sekarang` text NOT NULL,
+  `riwayat_penyakit_dahulu` text NOT NULL,
+  `riwayat_pengobatan` text NOT NULL,
+  `tekanan_darah` bigint(20) NOT NULL,
   `nadi` bigint(20) NOT NULL,
-  `suhu﻿` bigint(20) NOT NULL,
-  `rr﻿` bigint(20) NOT NULL,
-  `tinggi_badan﻿` bigint(20) NOT NULL,
-  `berat_badan﻿` bigint(20) NOT NULL,
-  `status_pemeriksaan﻿` enum('pending','sukses','batal') NOT NULL,
-  `user_id﻿` bigint(20) NOT NULL,
-  `created_at﻿` timestamp NULL DEFAULT NULL,
-  `updated_at﻿` timestamp NULL DEFAULT NULL
+  `suhu` bigint(20) NOT NULL,
+  `rr` bigint(20) NOT NULL,
+  `tinggi_badan` bigint(20) NOT NULL,
+  `berat_badan` bigint(20) NOT NULL,
+  `status_pemeriksaan` enum('pending','sukses','batal') NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pemeriksaan_pasien`
+--
+
+INSERT INTO `pemeriksaan_pasien` (`id`, `pasien_id`, `keluhan_utama`, `riwayat_penyakit_sekarang`, `riwayat_penyakit_dahulu`, `riwayat_pengobatan`, `tekanan_darah`, `nadi`, `suhu`, `rr`, `tinggi_badan`, `berat_badan`, `status_pemeriksaan`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 'tidak ada ', 'asma', 'asma ', 'tidak ada ', 20, 10, 20, 10, 10, 10, 'pending', 0, '2024-05-14 05:01:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -119,9 +126,17 @@ CREATE TABLE `rekam_medis` (
   `diganosa_utama_code` varchar(255) NOT NULL,
   `diganosa_utama_name` text NOT NULL,
   `catatan` text DEFAULT NULL,
-  `created_at﻿` timestamp NULL DEFAULT NULL,
-  `updated_at﻿` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rekam_medis`
+--
+
+INSERT INTO `rekam_medis` (`id`, `pemeriksaan_id`, `diganosa_utama_code`, `diganosa_utama_name`, `catatan`, `created_at`, `updated_at`) VALUES
+(1, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', 'afaf', NULL, NULL),
+(2, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', 'qwrwqr', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,12 +146,21 @@ CREATE TABLE `rekam_medis` (
 
 CREATE TABLE `rekam_medis_diagnosa` (
   `id` bigint(20) NOT NULL,
-  `rekam_medis_id﻿` bigint(20) NOT NULL,
+  `rekam_medis_id` bigint(20) NOT NULL,
   `diagnosa_sekunder_code` varchar(255) NOT NULL,
   `diagnosa_sekunder_name` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rekam_medis_diagnosa`
+--
+
+INSERT INTO `rekam_medis_diagnosa` (`id`, `rekam_medis_id`, `diagnosa_sekunder_code`, `diagnosa_sekunder_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', NULL, NULL),
+(2, 2, 'B001', 'Herpesviral vesicular dermatitis', NULL, NULL),
+(3, 2, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -146,12 +170,22 @@ CREATE TABLE `rekam_medis_diagnosa` (
 
 CREATE TABLE `rekam_medis_obat` (
   `id` bigint(20) NOT NULL,
-  `rekam_medis_id﻿` bigint(20) NOT NULL,
+  `rekam_medis_id` bigint(20) NOT NULL,
   `obat_id` bigint(20) NOT NULL,
   `qty` bigint(20) NOT NULL,
+  `frekuensi` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rekam_medis_obat`
+--
+
+INSERT INTO `rekam_medis_obat` (`id`, `rekam_medis_id`, `obat_id`, `qty`, `frekuensi`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 12, 'afasf', NULL, NULL),
+(2, 2, 1, 12, 'afasf', NULL, NULL),
+(3, 2, 1, 12, 'afasf', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -194,9 +228,9 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pemeriksaan_pasien﻿`
+-- Indexes for table `pemeriksaan_pasien`
 --
-ALTER TABLE `pemeriksaan_pasien﻿`
+ALTER TABLE `pemeriksaan_pasien`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -237,31 +271,31 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `pemeriksaan_pasien﻿`
+-- AUTO_INCREMENT for table `pemeriksaan_pasien`
 --
-ALTER TABLE `pemeriksaan_pasien﻿`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pemeriksaan_pasien`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis`
 --
 ALTER TABLE `rekam_medis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis_diagnosa`
 --
 ALTER TABLE `rekam_medis_diagnosa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis_obat`
 --
 ALTER TABLE `rekam_medis_obat`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
