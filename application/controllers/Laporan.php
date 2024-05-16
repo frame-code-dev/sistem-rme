@@ -59,4 +59,9 @@ class Laporan extends CI_Controller
             $this->load->view('backoffice/laporan/kunjungan', $data);
         }
     }
+
+	public function pdf() {
+		$data['title'] = "LAPORAN KUNJUNGAN PASIEN";
+		$this->load->view('backoffice/laporan/kunjungan_pdf',$data);
+	}
 }

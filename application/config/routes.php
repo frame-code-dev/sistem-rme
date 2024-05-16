@@ -104,6 +104,7 @@ $route['apotek/store'] = 'apotek/store';
 
 // Laporan
 $route['laporan/kunjungan'] = 'laporan/kunjungan';
+$route['laporan/kunjungan/pdf'] = 'laporan/pdf';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
