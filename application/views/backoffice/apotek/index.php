@@ -31,6 +31,7 @@
 									<th scope="col" class="px-4 py-3">No. JKN</th>
 									<th scope="col" class="px-4 py-3">Nama</th>
 									<th scope="col" class="px-4 py-3">Diagnosa</th>
+									<th scope="col" class="px-4 py-3">Status</th>
 									<th scope="col" class="px-4 py-3">
 										<span class="sr-only">Actions</span>
 									</th>
@@ -45,14 +46,25 @@
 										<td class="px-4 py-3"><?=$item->no_jkn != null ? $item->no_jkn : '-'?></td>
 										<td class="px-4 py-3"><?=ucwords($item->name)?></td>
 										<td class="px-4 py-3"><?=ucwords($item->diagnosa_name)?></td>
+										<td class="px-4 py-3">
+                                            <?php if ($item->status_pemeriksaan == 'sukses') : ?>
+                                                <span class="text-green-400"><?=ucwords($item->status_pemeriksaan)?></span>
+                                            <?php elseif ($item->status_pemeriksaan == 'batal') : ?>
+                                                <span class="text-red-400"><?=ucwords($item->status_pemeriksaan)?></span>
+                                            <?php else : ?>
+                                                <span><?=ucwords($item->status_pemeriksaan)?></span>
+                                            <?php endif; ?>
+                                        </td>
 										<td class="px-4 py-3 flex items-center">
                                             <a href="#" class="btn-rincian text-white bg-yellow-300 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-yellow-600 dark:hover:bg-yellow-300 dark:focus:ring-yellow-300"
                                             data-rm_id="<?=$item->id?>">
                                                 Rincian
                                             </a>
-                                            <a href="#" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                Selesaikan
-                                            </a>
+                                            <?php if ($item->status_pemeriksaan == 'pending') : ?>
+                                                <a href="<?=base_url('apotek/create/'.$item->id)?>" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                    Selesaikan
+                                                </a>
+                                            <?php endif; ?>
 										</td>
 									</tr>
 								<?php endforeach; ?>

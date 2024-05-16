@@ -99,7 +99,7 @@ $route['rekam-medis/store/(:any)'] = 'rekammedis/store/$1';
 // Apotek
 $route['apotek'] = 'apotek/index';
 $route['apotek/detail/(:any)'] = 'apotek/detail/$1';
-$route['apotek/create'] = 'apotek/create';
+$route['apotek/create/(:any)'] = 'apotek/create/$1';
 $route['apotek/store'] = 'apotek/store';
 
 // Laporan

@@ -15,19 +15,11 @@ class Apotek_model extends CI_Model
         $this->db->from($this->_table_rm);
         $this->db->join($this->_table_pemeriksaan.' AS pemeriksaan', 'pemeriksaan.id = rekam_medis.pemeriksaan_id');
         $this->db->join($this->_table_pasien.' AS pasien', 'pemeriksaan.pasien_id = pasien.id');
-		$this->db->select('pasien.name, pasien.nik, pasien.no_jkn, pasien.no_rm, pemeriksaan.id AS pemeriksaan_id, rekam_medis.id, rekam_medis.diganosa_utama_code AS diagnosa_code, rekam_medis.diganosa_utama_name AS diagnosa_name');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_jkn, pasien.no_rm, pemeriksaan.id AS pemeriksaan_id, pemeriksaan.status_pemeriksaan, rekam_medis.id, rekam_medis.diganosa_utama_code AS diagnosa_code, rekam_medis.diganosa_utama_name AS diagnosa_name');
+        $this->db->order_by('pemeriksaan.status_pemeriksaan', 'pending, sukses, batal');
         $this->db->order_by('rekam_medis.created_at', 'desc');
         $query = $this->db->get();
         $data = $query->result();
-
-        // if ($data) {
-        //     foreach ($data as $value) {
-        //         $rm_diagnosa = $this->getRekamDiagnosaByRekamId($value->id);
-        //         $rm_obat = $this->getRekamObatByRekamId($value->id);
-        //         $value->rm_diagnosa = $rm_diagnosa;
-        //         $value->rm_obat = $rm_obat;
-        //     }
-        // }
 
         return $data;
     }
@@ -46,11 +38,36 @@ class Apotek_model extends CI_Model
     {
         $this->db->from($this->_table_rm_obat);
         $this->db->join($this->_table_obat, 'obat.id = rekam_medis_obat.obat_id');
-        $this->db->select('obat.name, rekam_medis_obat.qty, rekam_medis_obat.frekuensi');
+        $this->db->select('obat.id, obat.name, rekam_medis_obat.qty, rekam_medis_obat.frekuensi');
         $this->db->where('rekam_medis_obat.rekam_medis_id', $rekam_id);
 
         $query = $this->db->get();
         return $query->result();
     }
     
+    public function getByRMId($id)
+    {
+        $this->db->from($this->_table_rm);
+        $this->db->join($this->_table_pemeriksaan.' AS pemeriksaan', 'pemeriksaan.id = rekam_medis.pemeriksaan_id');
+        $this->db->join($this->_table_pasien.' AS pasien', 'pemeriksaan.pasien_id = pasien.id');
+		$this->db->select('
+            pasien.name,
+            pasien.nik,
+            pasien.no_jkn,
+            pasien.no_rm,
+            pasien.jenis_kelamin,
+            pasien.jenis_pasien,
+            pasien.tanggal_lahir,
+            pemeriksaan.id AS pemeriksaan_id,
+            rekam_medis.id,
+            rekam_medis.diganosa_utama_code AS diagnosa_code,
+            rekam_medis.diganosa_utama_name AS diagnosa_name,
+        ');
+        $this->db->where('rekam_medis.id', $id);
+        $this->db->order_by('rekam_medis.created_at', 'desc');
+        $query = $this->db->get();
+        $data = $query->row();
+
+        return $data;
+    }
 }

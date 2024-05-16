@@ -64,4 +64,11 @@ class Obat_model extends CI_Model
     {
         return $this->db->delete($this->_table, array("id" => $id));
     }
+
+    public function subtractStock($id, int $stock_used)
+    {
+        $this->db->set('stok', 'stok-'.$stock_used, FALSE);
+        $this->db->where('id', $id);
+        $this->db->update($this->_table);
+    }
 }

@@ -159,4 +159,12 @@ class Pemeriksaan_model extends CI_Model
 		]);
 		return $this->db->insert_id();
 	}
+
+	public function updateStatus($id, $status)
+	{
+		$this->db->update($this->_table, [
+			'status_pemeriksaan' => $status,
+			'updated_at' => date('Y-m-d H:i:s')
+		], array('id' => $id));
+	}
 }
