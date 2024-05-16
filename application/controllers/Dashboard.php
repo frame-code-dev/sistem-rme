@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('auth_model');
+		$this->load->model('Pasien_model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -13,15 +14,13 @@ class Dashboard extends CI_Controller
 
 	public function index()
 	{
-		// $this->load->model('article_model');
-		// $this->load->model('feedback_model');
-		
 		$data = [
 			"current_user" => $this->auth_model->current_user(),
-			// "article_count" => $this->article_model->count(),
-			// "feedback_count" => $this->feedback_model->count()
+			"count_pasien" => $this->Pasien_model->totalKunjungan(),
+			"count_umum" => $this->Pasien_model->totalPasienUmum(),
+			"count_bpjs" => $this->Pasien_model->totalPasienBPJS(),
+			"persentaseKunjungan" => $this->Pasien_model->persentaseKunjungan()
 		];
-
 		$this->load->view('dashboard', $data);
 	}
 

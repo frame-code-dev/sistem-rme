@@ -108,5 +108,4 @@ class Pasien extends CI_Controller
 		redirect('pasien');
 	}
 
-
 }

@@ -115,6 +115,44 @@ class Pasien_model extends CI_Model
         return $this->db->get($this->_table)->result();
     }
 
+	public function totalKunjungan() {
+		return $this->db->get($this->_table)->num_rows();
+	}
+
+	public function totalPasienUmum() {
+		$this->db->from($this->_table);
+		$this->db->where('jenis_pasien','umum');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function totalPasienBPJS() {
+		$this->db->from($this->_table);
+		$this->db->where('jenis_pasien','bpjs');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+	public function persentaseKunjungan() {
+		// Mendapatkan data kunjungan per bulan
+		$this->db->select('MONTH(created_at) as bulan, COUNT(*) as total_kunjungan');
+		$this->db->from($this->_table);
+		$this->db->group_by('MONTH(created_at)');
+		$result = $this->db->get()->result_array();
+	
+		// Inisialisasi array untuk menyimpan hasil
+		$data = array();
+		
+		// Mendapatkan total kunjungan per bulan
+		foreach($result as $row) {
+			$bulan = date("F", mktime(0, 0, 0, $row['bulan'], 1)); // Konversi nomor bulan menjadi nama bulan
+			$total_kunjungan = $row['total_kunjungan'];
+			// Simpan data ke dalam array
+			$data[$bulan] = $total_kunjungan;
+		}
+	
+			return $data;
+	}	
+
 	public function getAntrean(){
 		$this->db->from($this->_table);
 		$this->db->where('id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)');

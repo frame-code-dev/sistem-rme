@@ -22,7 +22,7 @@
 							</div>
 							<div class="mt-3">
 								<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-								20
+									<?=$count_pasien?>
 								</h2>
 								<p class="text-gray-500 text-sm tracking-tighter">
 									Total Kunjungan Pasien
@@ -42,7 +42,7 @@
 								</div>
 								<div class="mt-3">
 									<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-									20
+										<?=$count_umum?>
 									</h2>
 									<p class="text-gray-500 text-sm tracking-tighter">
 										Jumlah Pasien Umum
@@ -64,7 +64,7 @@
 								</div>
 								<div class="mt-3">
 									<h2 class="text-theme-text text-3xl font-bold tracking-tighter">
-									20
+									<?=$count_bpjs?>
 									</h2>
 									<p class="text-gray-500 text-sm tracking-tighter">
 										Total Pasien BPJS
@@ -99,9 +99,18 @@
    
 	<?php $this->load->view("template/_partials/script") ?>
 	<script>
+		// Data kunjungan per bulan
+        var kunjunganPerBulan = <?php echo json_encode($persentaseKunjungan); ?>;
+		console.log(kunjunganPerBulan);
+        // Mendapatkan label bulan
+        var labels = Object.keys(kunjunganPerBulan);
+        // Mendapatkan data kunjungan
+        var data = Object.values(kunjunganPerBulan);
+		console.log(data);
 		var options = {
 			series: [{
-				data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+				name: 'Kunjungan',
+				data:data
 			}],
 			chart: {
 				type: 'bar',
@@ -118,9 +127,7 @@
 				enabled: false
 			},
 			xaxis: {
-				categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-					'United States', 'China', 'Germany'
-				],
+				categories: labels,
 			}
 		};
 
