@@ -39,7 +39,7 @@
                                         <?= form_error('sampai') ?>
                                     </div>
                                 </div>
-                                <div class="">
+                                <!-- <div class="">
                                     <label for="" class="block mb-2 text-sm font-semibold text-gray-900">Jenis Kelamin</label>
                                     <select id="jenis_kelamin" name="jenis_kelamin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option value="">Semua</option>
@@ -60,12 +60,12 @@
                                     <div class="text-red-500 text-xs italic font-semibold">
                                         <?= form_error('jenis_pasien') ?>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
                                 <?php if (count($data) > 0): ?>
                                     <div>
-                                        <a href="" class="bg-white text-yellow-400 hover:text-yellow-600 border border-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900" type="button">Cetak</a>
+                                        <a href="<?=base_url('laporan/kunjungan/pdf?dari='.$_GET['dari'].'&sampai='.$_GET['sampai'])?>" class="bg-white text-yellow-400 hover:text-yellow-600 border border-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900" target="_blank" type="button">Cetak PDF</a>
                                     </div>
                                 <?php endif; ?>
                                 <div>

@@ -123,7 +123,7 @@
                         <button onclick="history.back()" class="btn btn-primary no-print"></i> Kembali</button>
                     </div>
                     <div class="mt-5">
-                        <h4 class="fw-bold">Periode : 1 Januari s/d 31 Januari</h4>
+                        <h4 class="fw-bold">Periode : <?=date('d M Y', strtotime($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></h4>
                     </div>
                     <table id="customers">
                         <thead>
@@ -139,7 +139,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                              
+                            <?php foreach ($data->list as $key => $item): ?>
+                                <tr class="border-b dark:border-gray-700">
+                                    <td class="px-4 py-3"><?php echo $key + 1; ?></td>
+                                    <td class="px-4 py-3"><?=date('d-m-Y', strtotime($item->created_at))?></td>
+                                    <td class="px-4 py-3"><?=ucwords($item->no_rm)?></td>
+                                    <td class="px-4 py-3"><?=ucwords($item->jenis_pasien)?></td>
+                                    <td class="px-4 py-3"><?=ucwords($item->name)?></td>
+                                    <td class="px-4 py-3"><?=ucwords($item->tanggal_lahir)?></td>
+                                    <td class="px-4 py-3">
+                                        <?= $item->jenis_kelamin == 'l' ?
+                                            'Laki-laki' : ($item->jenis_kelamin == 'p' ? 'Perempuan' : 'Tidak diketahui') ?>
+                                    </td>
+                                    <td class="px-4 py-3"><?=ucwords($item->alamat)?></td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
 					<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -147,67 +161,67 @@
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2 fw-bold">Total Kunjungan</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_kunjungan?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Umum</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_umum_l + $data->total_umum_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Laki-Laki</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
-							</tr>
+								<td class="font-bold"><?=$data->total_umum_l?></td>
+                            </tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Perempuan</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_umum_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2 fw-bold">Jumlah Pasien BPJS</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_bpjs_l + $data->total_bpjs_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Laki-Laki</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_bpjs_l?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Perempuan</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_bpjs_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Baru</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_baru_l + $data->total_pasien_baru_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Laki-Laki</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_baru_l?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Perempuan</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_baru_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Lama</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_lama_l + $data->total_pasien_lama_p?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Laki-Laki</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_lama_l?></td>
 							</tr>
 							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
 								<td width="30%" class="p-2">Perempuan</td>
 								<td width="1%">:</td>
-								<td class="font-bold">asda</td>
+								<td class="font-bold"><?=$data->total_pasien_lama_p?></td>
 							</tr>
 						</tbody>
 					</table>
