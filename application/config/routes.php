@@ -63,6 +63,9 @@ $route['user/store'] = 'user/store';
 $route['user/edit/(:any)'] = 'user/edit/$1';
 $route['user/update/(:any)'] = 'user/update/$1';
 $route['user/delete/(:any)'] = 'user/delete/$1';
+// profile 
+$route['profile/(:any)'] = 'profile/index/$1';
+$route['profile/update/(:any)'] = 'profile/update/$1';
 // obat 
 $route['obat'] = 'obat/index';
 $route['obat/create'] = 'obat/create';
@@ -70,6 +73,8 @@ $route['obat/store'] = 'obat/store';
 $route['obat/edit/(:any)'] = 'obat/edit/$1';
 $route['obat/update/(:any)'] = 'obat/update/$1';
 $route['obat/delete/(:any)'] = 'obat/delete/$1';
+$route['obat/edit-stok/(:any)'] = 'obat/editStok/$1';
+$route['obat/update-stok/(:any)'] = 'obat/updateStok/$1';
 
 //Pasien 
 $route['pasien'] = 'pasien/index';
@@ -95,7 +100,6 @@ $route['rekam-medis/create/(:any)'] = 'rekammedis/create/$1';
 $route['rekam-medis/data-obat'] = 'rekammedis/dataobat';
 $route['rekam-medis/store/(:any)'] = 'rekammedis/store/$1';
 
-
 // Apotek
 $route['apotek'] = 'apotek/index';
 $route['apotek/detail/(:any)'] = 'apotek/detail/$1';
@@ -103,8 +107,18 @@ $route['apotek/create/(:any)'] = 'apotek/create/$1';
 $route['apotek/store'] = 'apotek/store';
 
 // Laporan
+// Laporan - Kunjungan 
 $route['laporan/kunjungan'] = 'laporan/kunjungan';
 $route['laporan/kunjungan/pdf'] = 'laporan/pdf';
+$route['laporan/kunjungan/excel'] = 'laporan/excel';
+// Laporan - Penyakit
+$route['laporan/penyakit'] = 'laporan/laporanPenyakit';
+$route['laporan/penyakit/pdf'] = 'laporan/penyakitPDF';
+$route['laporan/penyakit/excel'] = 'laporan/penyakitExcel';
+// Laporan - Obat
+$route['laporan/obat'] = 'laporan/laporanObat';
+$route['laporan/obat/pdf'] = 'laporan/laporanObatPDF';
+$route['laporan/obat/excel'] = 'laporan/laporanObatExcel';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

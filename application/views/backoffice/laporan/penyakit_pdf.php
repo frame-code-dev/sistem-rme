@@ -120,7 +120,7 @@
                     </h1>
 					
                     <div class="d-flex justify-content-end">
-                        <a href="<?=base_url('laporan/kunjungan')?>" class="btn btn-primary no-print"></i> Kembali</a>
+                        <a href="<?=base_url('laporan/kunjungan/penyakit')?>" class="btn btn-primary no-print"></i> Kembali</a>
                     </div>
                     <div class="mt-5">
                         <h4 class="fw-bold">Periode : <?=date('d M Y', strtotime($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></h4>
@@ -129,102 +129,22 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal Kunjungan</th>
-                                <th>No.RM</th>
-                                <th>Jenis Pasien</th>
-                                <th>Nama</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Alamat</th>
+                                <th>Nama Penyakit</th>
+                                <th>Jumlah</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data->list as $key => $item): ?>
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="px-4 py-3"><?php echo $key + 1; ?></td>
-                                    <td class="px-4 py-3"><?=date('d-m-Y', strtotime($item->created_at))?></td>
-                                    <td class="px-4 py-3"><?=ucwords($item->no_rm)?></td>
-                                    <td class="px-4 py-3"><?=ucwords($item->jenis_pasien)?></td>
-                                    <td class="px-4 py-3"><?=ucwords($item->name)?></td>
-                                    <td class="px-4 py-3"><?=ucwords($item->tanggal_lahir)?></td>
-                                    <td class="px-4 py-3">
-                                        <?= $item->jenis_kelamin == 'l' ?
-                                            'Laki-laki' : ($item->jenis_kelamin == 'p' ? 'Perempuan' : 'Tidak diketahui') ?>
-                                    </td>
-                                    <td class="px-4 py-3"><?=ucwords($item->alamat)?></td>
-                                </tr>
+                            <?php foreach ($data as $key => $item): ?>
+								<tr class="border-b dark:border-gray-700">
+									<td class="px-4 py-3"><?php echo $key + 1; ?></td>
+									<td class="px-4 py-3"><?=ucwords($item->diganosa_utama_name)?></td>
+									<td class="px-4 py-3"><?=ucwords($item->jumlah)?></td>
+								</tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-					<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-						<tbody class="w-full">
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Total Kunjungan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_kunjungan?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Umum</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_l + $data->total_umum_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_l?></td>
-                            </tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien BPJS</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_l + $data->total_bpjs_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Baru</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_l + $data->total_pasien_baru_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Lama</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_l + $data->total_pasien_lama_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_p?></td>
-							</tr>
-						</tbody>
-					</table>
+				
                 </div>
             </div>
         </div>

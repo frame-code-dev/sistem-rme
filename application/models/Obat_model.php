@@ -8,6 +8,7 @@ class Obat_model extends CI_Model
 	public $name;
 	public $stok;
 	public $dosis;
+	public $satuan;
 	public $created_at;
 
 	public function rules(){
@@ -27,6 +28,11 @@ class Obat_model extends CI_Model
                 'label' => 'Dosis',
                 'rules' => 'required'
             ],
+			[
+                'field' => 'satuan',
+                'label' => 'Satuan',
+                'rules' => 'required'
+            ],
         ];
     }
 
@@ -43,6 +49,7 @@ class Obat_model extends CI_Model
     {
         $post = $this->input->post();
         $this->name = $post["name"];
+        $this->satuan = $post["satuan"];
         $this->stok = $post["stok"];
         $this->dosis = $post["dosis"];
 		$this->created_at = date('Y-m-d H:i:s');
@@ -55,7 +62,17 @@ class Obat_model extends CI_Model
 		return $this->db->update($this->_table, [
 			'name' => $post['name'],
 			'stok' => $post['stok'],
+			'satuan' => $post['satuan'],
 			'dosis' => $post['dosis'],
+			'updated_at' => date('Y-m-d H:i:s')
+		], array('id' => $id));
+    }
+	public function updateDataStok($id)
+    {
+        $post = $this->input->post();
+		$result_stok = $this->getById($id)->penerimaan_stok + $post['stok'];
+		return $this->db->update($this->_table, [
+			'penerimaan_stok' => $result_stok,
 			'updated_at' => date('Y-m-d H:i:s')
 		], array('id' => $id));
     }

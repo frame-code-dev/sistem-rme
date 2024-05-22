@@ -23,6 +23,20 @@ class Apotek_model extends CI_Model
 
         return $data;
     }
+	public function getDiagnosaById($id)
+    {
+        $this->db->from($this->_table_rm);
+        $this->db->join($this->_table_pemeriksaan.' AS pemeriksaan', 'pemeriksaan.id = rekam_medis.pemeriksaan_id');
+        $this->db->join($this->_table_pasien.' AS pasien', 'pemeriksaan.pasien_id = pasien.id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_jkn, pasien.no_rm, pemeriksaan.id AS pemeriksaan_id, pemeriksaan.status_pemeriksaan, rekam_medis.id, rekam_medis.diganosa_utama_code AS diagnosa_code, rekam_medis.diganosa_utama_name AS diagnosa_name');
+        $this->db->order_by('pemeriksaan.status_pemeriksaan', 'pending, sukses, batal');
+        $this->db->order_by('rekam_medis.created_at', 'desc');
+		$this->db->where('pemeriksaan.pasien_id',$id);
+        $query = $this->db->get();
+        $data = $query->result();
+
+        return $data;
+    }
 
     public function getRekamDiagnosaByRekamId($rekam_id)
     {
@@ -67,6 +81,27 @@ class Apotek_model extends CI_Model
         $this->db->order_by('rekam_medis.created_at', 'desc');
         $query = $this->db->get();
         $data = $query->row();
+
+        return $data;
+    }
+
+	public function DiagnosaCount($filter)
+    {
+        $this->db->from($this->_table_rm);
+		$this->db->select('rekam_medis.*,');
+		$this->db->select('COUNT(rekam_medis.diganosa_utama_code) AS jumlah');
+        if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(rekam_medis.created_at) BETWEEN '$dari' AND '$sampai')");
+
+		}
+		$this->db->group_by('rekam_medis.diganosa_utama_code');
+		$this->db->order_by('jumlah', 'desc');
+        $query = $this->db->get();
+        $data = $query->result();
 
         return $data;
     }

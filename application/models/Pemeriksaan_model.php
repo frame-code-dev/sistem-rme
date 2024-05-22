@@ -141,7 +141,7 @@ class Pemeriksaan_model extends CI_Model
 
 	public function save() {
 		$post = $this->input->post();
-        $this->db->insert($this->_table,[
+        $this->db->update($this->_table,[
 			'pasien_id' => $post["pasien_id"],
 			'keluhan_utama' => $post["keluhan_utama"],
 			'riwayat_penyakit_sekarang' => $post["riwayat_penyakit_sekarang"],
@@ -156,7 +156,7 @@ class Pemeriksaan_model extends CI_Model
 			'status_pemeriksaan' => 'pending',
 			'user_id' => $this->session->userdata('user_id'),
 			'created_at' => date('Y-m-d H:i:s'),
-		]);
+		], array('id' => $post["id"]));
 		return $this->db->insert_id();
 	}
 

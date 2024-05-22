@@ -102,7 +102,7 @@ class Apotek extends CI_Controller
 			// Update status pemeriksaan
 			$this->Pemeriksaan_model->updateStatus($pemeriksaan_id, 'sukses');
 			$this->db->trans_complete();
-            $this->session->set_flashdata('message', 'Berhasil menyelsaikan antrean');
+            $this->session->set_flashdata('message', 'Berhasil menyelesaikan antrean');
 			redirect('apotek/index');
 		}
 		else {

@@ -9,6 +9,7 @@ class Laporan extends CI_Controller
         parent::__construct();
 		$this->load->model('Pemeriksaan_model');
 		$this->load->model('Laporan_model');
+		$this->load->model('Apotek_model');
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
 		if(!$this->auth_model->current_user()){
@@ -97,4 +98,257 @@ class Laporan extends CI_Controller
             $this->load->view('backoffice/laporan/kunjungan', $data);
         }
 	}
+	public function excel() {
+        // init page
+        $data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = "LAPORAN KUNJUNGAN PASIEN";
+
+        // form validation
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('dari', 'Dari', 'required');
+        $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+        $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+        $validation = $this->form_validation;
+
+        if ($validation->run()) {
+            // form variables
+            $status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+
+            // retrieve data
+            $result = $this->Laporan_model->getByStatus($status, $filter);
+            $data['data'] = $result;
+
+            $this->load->view('backoffice/laporan/kunjungan_excel',$data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/kunjungan', $data);
+        }
+	}
+
+	public function laporanPenyakit() {
+		$data['title'] = 'List Laporan 10 Besar Penyakit';
+		$data['current_user'] = $this->auth_model->current_user();
+		$this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('dari', 'Dari', 'required');
+        $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+        $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+        $validation = $this->form_validation;
+
+        if ($validation->run()) {
+            // form variables
+            $status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+            // retrieve data
+            $list = $this->Apotek_model->DiagnosaCount($filter);
+            $data['data'] = $list;
+            $this->load->view('backoffice/laporan/penyakit', $data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/penyakit', $data);
+        }
+	}
+
+	public function penyakitPDF() {
+        // init page
+        $data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+
+        // form validation
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('dari', 'Dari', 'required');
+        $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+        $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+        $validation = $this->form_validation;
+
+        if ($validation->run()) {
+            // form variables
+            $status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+
+            // retrieve data
+            $result = $this->Apotek_model->DiagnosaCount($filter);
+            $data['data'] = $result;
+
+            $this->load->view('backoffice/laporan/penyakit_pdf',$data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/penyakit', $data);
+        }
+	}
+
+	public function penyakitExcel() {
+        // init page
+        $data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+
+        // form validation
+        $this->form_validation->set_data($this->input->get());
+        $this->form_validation->set_rules('dari', 'Dari', 'required');
+        $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+        $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+        $validation = $this->form_validation;
+
+        if ($validation->run()) {
+            // form variables
+            $status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+
+            // retrieve data
+            $result = $this->Apotek_model->DiagnosaCount($filter);
+            $data['data'] = $result;
+
+            $this->load->view('backoffice/laporan/penyakit_excel',$data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/penyakit', $data);
+        }
+	}
+
+	public function laporanObat()
+	{
+		// init page
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = 'Laporan Obat';
+
+		// form validation
+		$this->form_validation->set_data($this->input->get());
+		$this->form_validation->set_rules('dari', 'Dari', 'required');
+		$this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		$this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		$validation = $this->form_validation;
+
+		if ($validation->run()) {
+            // form variables
+            $status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+            // retrieve data
+            $list = $this->Laporan_model->stokObat($filter);
+            $data['data'] = $list;
+            $this->load->view('backoffice/laporan/obat', $data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/obat', $data);
+        }
+	}
+
+	public function laporanObatPDF() {
+		 // init page
+		 $data['current_user'] = $this->auth_model->current_user();
+		 $data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+ 
+		 // form validation
+		 $this->form_validation->set_data($this->input->get());
+		 $this->form_validation->set_rules('dari', 'Dari', 'required');
+		 $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		 $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		 $validation = $this->form_validation;
+ 
+		 if ($validation->run()) {
+			 // form variables
+			 $status = 'sukses';
+			 $dari = $this->input->get('dari');
+			 $sampai = $this->input->get('sampai');
+ 
+			 // create obj for filter
+			 $filter = new stdClass;
+			 if ($dari && $sampai) {
+				 $filter->dari = $dari;
+				 $filter->sampai = $sampai;
+			 }
+ 
+			 // retrieve data
+			 $result = $this->Laporan_model->stokObat($filter);
+			 $data['data'] = $result;
+ 
+			 $this->load->view('backoffice/laporan/obat_pdf',$data);
+		 }
+		 else {
+			 $data['data'] = [];
+			 $this->load->view('backoffice/laporan/obat', $data);
+		 }
+	}
+	public function laporanObatExcel() {
+		// init page
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+
+		// form validation
+		$this->form_validation->set_data($this->input->get());
+		$this->form_validation->set_rules('dari', 'Dari', 'required');
+		$this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		$this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		$validation = $this->form_validation;
+
+		if ($validation->run()) {
+			// form variables
+			$status = 'sukses';
+			$dari = $this->input->get('dari');
+			$sampai = $this->input->get('sampai');
+
+			// create obj for filter
+			$filter = new stdClass;
+			if ($dari && $sampai) {
+				$filter->dari = $dari;
+				$filter->sampai = $sampai;
+			}
+
+			// retrieve data
+			$result = $this->Laporan_model->stokObat($filter);
+			$data['data'] = $result;
+
+			$this->load->view('backoffice/laporan/obat_excel',$data);
+		}
+		else {
+			$data['data'] = [];
+			$this->load->view('backoffice/laporan/obat', $data);
+		}
+   }
+
+
 }

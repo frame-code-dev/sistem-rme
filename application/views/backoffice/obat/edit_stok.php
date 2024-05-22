@@ -53,32 +53,21 @@
 						</div>
 					</div>
 					<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-						<form action="<?=base_url('obat/update/'.$obat->id)?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
+						<form action="<?=base_url('obat/update-stok/'.$obat->id)?>" method="POST" class="w-full mx-auto space-y-4" enctype="multipart/form-data">
 							<div class="grid grid-cols-1 gap-3">
 								<div class="">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Obat<span class="me-2 text-red-500">*</span></label>
-									<input type="text" value="<?=$obat->name?>" placeholder="Masukkan Obat" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<input type="text" readonly value="<?=$obat->name?>" placeholder="Masukkan Obat" name="name" id="name" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 									<div class="text-red-500 text-xs italic font-semibold">
 										<?= form_error('name') ?>
 									</div>
 								</div>
-								<div class="">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Satuan<span class="me-2 text-red-500">*</span></label>
-									<input type="text" value="<?=$obat->satuan?>" placeholder="Masukkan Satuan" name="satuan" id="satuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('satuan') ?>
-									</div>
+								<div>
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Stok Terakhir : <?=$obat->penerimaan_stok?></label>
 								</div>
 								<div class="">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Dosis<span class="me-2 text-red-500">*</span></label>
-									<input type="text" value="<?=$obat->dosis?>" placeholder="Masukkan Dosis" name="dosis" id="dosis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('dosis') ?>
-									</div>
-								</div>
-								<div class="">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Stok<span class="me-2 text-red-500">*</span></label>
-									<input type="number" value="<?=$obat->stok?>" placeholder="Masukkan Stok" name="stok" id="stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Stok Terakhir</label>
+									<input type="number" value="" placeholder="Masukkan Stok" name="stok" id="stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 									<div class="text-red-500 text-xs italic font-semibold">
 										<?= form_error('stok') ?>
 									</div>

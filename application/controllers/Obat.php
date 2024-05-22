@@ -77,10 +77,8 @@ class Obat extends CI_Controller
 			$data['title'] = 'Edit Obat';
 			$data['current_page'] = 'List Obat';
 			$data["obat"] = $obat->getById($id);
-			
 			$this->load->view("backoffice/obat/edit", $data);
 		}
-
     }
 
 	public function delete($id = null) {
@@ -90,5 +88,37 @@ class Obat extends CI_Controller
 		$this->session->set_flashdata('message', 'Berhasil menghapus data');
 		redirect('obat');
 	}
+
+	public function editStok($id = null) {
+		if (!isset($id)) redirect('obat');
+
+		$data['title'] = 'Update Stok Obat';
+		$data['current_page'] = 'List Obat';
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['obat'] = $this->Obat_model->getById($id);
+		if (!$data['obat']) show_404();
+		$this->load->view('backoffice/obat/edit_stok', $data);
+	}
+	public function updateStok($id = null)
+    {
+        if (!isset($id)) redirect('user');
+       
+        $obat = $this->Obat_model;
+		$validation = $this->form_validation;
+		$validation->set_rules('stok','Stok penerimaan obat','required');
+
+        if ($validation->run()) {
+            $obat->updateDataStok($id);
+            $this->session->set_flashdata('message', 'Berhasil update stok');
+			redirect('obat');
+        }else{
+			$data['title'] = 'Edit Obat';
+			$data['current_page'] = 'List Obat';
+			$data["obat"] = $obat->getById($id);
+			
+			$this->load->view("backoffice/obat/edit", $data);
+		}
+
+    }
 
 }

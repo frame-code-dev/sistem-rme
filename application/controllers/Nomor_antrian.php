@@ -45,6 +45,7 @@ class Nomor_antrian extends CI_Controller {
 		$data['data'] = $this->Pasien_model->getById($id);
 		$no_antrian = $this->Pasien_model->get_nomor_antrian();
 		$data['no_antrian'] = $no_antrian;
+		
 		$this->load->view('backoffice/pasien/pendaftaran_pasien_lama', $data);
 	}
 
@@ -54,6 +55,9 @@ class Nomor_antrian extends CI_Controller {
 		// Menampilkan nomor urutan baru
 		$update = $this->Pasien_model;
 		$update->updateDataAntrian($id);
+		$this->db->insert('pemeriksaan_pasien',[
+			'pasien_id' => $id,
+		]);
 		$this->session->set_flashdata('message', 'Berhasil mendaftarkan.');
 		redirect('nomor_antrian/index/' . $id);
 	}

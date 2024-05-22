@@ -2,6 +2,11 @@
 
 class Laporan_model extends CI_Model
 {
+	private $_table_rm = "rekam_medis";
+	private $_table_rekam_medis_obat = 'rekam_medis_obat';
+	private $_table_obat = "obat";
+	private $_table_pemeriksaan = 'pemeriksaan_pasien';
+
 	public function getByStatus($status=null, $filter=null) {
 		$this->db->from('pemeriksaan_pasien');
 		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
@@ -75,5 +80,28 @@ class Laporan_model extends CI_Model
         $result->total_pasien_lama_p = $total_pasien_lama_p;
 
 		return $result;
+	}
+
+	public function stokObat($filter=null){
+		$this->db->from($this->_table_rm);
+        $this->db->join($this->_table_pemeriksaan,'pemeriksaan_pasien.id = rekam_medis.pemeriksaan_id');
+        $this->db->join($this->_table_rekam_medis_obat, 'rekam_medis_obat.rekam_medis_id = rekam_medis.id');
+		$this->db->join($this->_table_obat, 'obat.id = rekam_medis_obat.obat_id');
+		$this->db->select('obat.id as id_obat, obat.name,obat.satuan,obat.penerimaan_stok, obat.stok, rekam_medis_obat.qty, rekam_medis_obat.frekuensi');
+		$this->db->select('SUM(rekam_medis_obat.qty) as total');  // Menghitung sisa stok
+		$this->db->select('(obat.stok - SUM(rekam_medis_obat.qty)) AS sisa_stok');  // Menghitung sisa stok
+		$this->db->where('pemeriksaan_pasien.status_pemeriksaan','sukses');
+		$this->db->group_by('obat.id');  // Mengelompokkan berdasarkan ID obat
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$query = $this->db->get();
+		$data = $query->result();
+		return $data;
+
 	}
 }

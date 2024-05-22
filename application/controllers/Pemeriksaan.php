@@ -45,8 +45,9 @@ class Pemeriksaan extends CI_Controller
 
 		$data['title'] = 'Pemeriksaan';
 		$data['current_page'] = 'List Pemeriksaan';
+		$data['current_pemeriksaan'] = $this->Pemeriksaan_model->getById($id);
 		$data['current_user'] = $this->auth_model->current_user();
-		$data['pasien'] = $this->Pasien_model->getById($id);
+		$data['pasien'] = $this->Pasien_model->getById($data['current_pemeriksaan']->pasien_id);
 		if (!$data['pasien']) show_404();
 
 		$this->load->view('backoffice/pemeriksaan/create', $data);

@@ -83,6 +83,7 @@
 						</table>
 						<form action="<?=base_url('pemeriksaan/store')?>" method="POST" class="w-full mx-auto mt-4 space-y-4" enctype="multipart/form-data">
                             <input type="hidden" name="pasien_id" value="<?=$pasien->id?>">
+                            <input type="hidden" name="id" value="<?=$current_pemeriksaan->id?>">
                             <div class="mt-5">
                                 <b>Assesmen Awal</b>
                             </div>

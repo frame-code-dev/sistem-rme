@@ -154,8 +154,10 @@ class Pasien_model extends CI_Model
 	}	
 
 	public function getAntrean(){
-		$this->db->from($this->_table);
-		$this->db->where('id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)');
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name,pasien.no_jkn,pasien.tanggal_lahir,pasien.jenis_kelamin,pasien.alamat, pasien.nik, pasien.no_rm, pemeriksaan_pasien.*');
+		$this->db->where('pemeriksaan_pasien.keluhan_utama',null);
 		$this->db->order_by('created_at', 'desc');
 		$query = $this->db->get();
 		
@@ -164,7 +166,11 @@ class Pasien_model extends CI_Model
 
 	public function getTotalAntrean() : int
 	{
-		$query = $this->db->query("SELECT * FROM $this->_table WHERE id NOT IN (SELECT pasien_id FROM pemeriksaan_pasien)");
+		$this->db->from('pemeriksaan_pasien');
+				$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+				$this->db->select('pasien.name,pasien.no_jkn,pasien.tanggal_lahir,pasien.jenis_kelamin,pasien.alamat, pasien.nik, pasien.no_rm, pemeriksaan_pasien.*');
+				$this->db->where('pemeriksaan_pasien.keluhan_utama',null);
+		$query = $this->db->get();
 		return (int) $query->num_rows();
 	}
 

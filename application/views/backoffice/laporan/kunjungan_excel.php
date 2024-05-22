@@ -81,37 +81,7 @@
         </style>
     </head>
     <body>
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-                <div class="d-flex justify-content-between mt-4">
-                    <div class="align-items-end p-0">
-                        <img src="<?=base_url('public/assets/logo-2.png')?>" class="img-fluid me-auto" width="120" alt="">
-                    </div>
-                    <div class="align-self-center p-0 ">
-                        <div class="row">
-                            <div class="col-md-12 me-auto ">
-                                <h1 class="text-center p-0 m-0 mt-2" style="font-size: 18px; letter-spacing: 0.4ch">DINAS KESEHATAN<br>
-                                </h1>
-                                
-                                <h1 class="text-center p-0 m-0 fw-bold mt-2" style="font-size: 18px;">
-									UPTD PUSKESMAS KALISAT
-                                </h1>
-                                <h5 class="text-center p-0 m-0 mt-2" style="font-size: 16px">Alamat Jl. M. Arifin No. 3 Kalisat Telp. (0331) 593096
-								 <br> Kode Pos 68193</h5>
-								<h1 class="text-center p-0 m-0 fw-bold mt-2" style="font-size: 18px;">
-                                    JEMBER
-                                </h1>
-
-                            </div>
-                        </div>
-                    </div>
-					<div class="align-items-end p-0">
-						<img src="<?=base_url('public/assets/logo-1.png')?>" class="img-fluid me-auto" width="120" alt="">
-					</div>
-                </div>
-            </div>
-        </div>
-        <hr color="black">
+        
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="content">
@@ -119,9 +89,6 @@
                         <?=$title?> <br> POLI UMUM <br> TAHUN 2024
                     </h1>
 					
-                    <div class="d-flex justify-content-end">
-                        <a href="<?=base_url('laporan/kunjungan')?>" class="btn btn-primary no-print"></i> Kembali</a>
-                    </div>
                     <div class="mt-5">
                         <h4 class="fw-bold">Periode : <?=date('d M Y', strtotime($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></h4>
                     </div>
@@ -229,7 +196,9 @@
             </div>
         </div>
     </body>
-    <script>
-        print();
-    </script>
+    <?php
+		$name = $title. '.xls';
+		header("Content-Type: application/xls");
+		header("Content-Disposition: attachment; filename=$name");
+	?>
 </html>

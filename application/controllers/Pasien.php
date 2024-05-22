@@ -60,9 +60,11 @@ class Pasien extends CI_Controller
 		$tambah = $this->Pasien_model;
         $validation = $this->form_validation;
         $validation->set_rules($tambah->rules());
-
         if ($validation->run()) {
 			$pasien_id = $tambah->save();
+			$this->db->insert('pemeriksaan_pasien',[
+				'pasien_id' => $pasien_id,
+			]);
             $this->session->set_flashdata('message', 'Berhasil menambahkan data.');
 			redirect('nomor_antrian/index/' . $pasien_id);
         }else{

@@ -13,6 +13,7 @@ class RekamMedis extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
 		$this->load->model('Obat_model');
+		$this->load->model('Apotek_model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -29,10 +30,11 @@ class RekamMedis extends CI_Controller
 		$data['data'] = $this->Rekam_model->getById($id);
 		$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
 		$data['obat'] = $this->Obat_model->getAll();
+
+		$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
 		$data['title'] = 'Diagnosa Rekam Medis';
 		$data['current_page'] = 'Rekam Medis';
 		$data['current_user'] = $this->auth_model->current_user();
-		
 		$this->load->view('backoffice/rekam-medis/create', $data);
 	}
 
