@@ -8,9 +8,12 @@ class Auth extends CI_Controller
 
 	public function login()
 	{
+		
 		$this->load->model('auth_model');
 		$this->load->library('form_validation');
-
+		if ($this->auth_model->current_user()) {
+			redirect('dashboard');
+		}
 		$rules = $this->auth_model->rules();
 		$this->form_validation->set_rules($rules);
 
@@ -26,7 +29,7 @@ class Auth extends CI_Controller
 		} else {
 			$this->session->set_flashdata('message_login_error', 'Login Gagal, pastikan username dan password benar!');
 		}
-
+	
 		$this->load->view('auth/login');
 	}
 

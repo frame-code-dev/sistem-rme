@@ -31,7 +31,6 @@ class Profile extends CI_Controller
         $user = $this->User_model;
         $validation = $this->form_validation;
         $validation->set_rules($user->rules_edit());
-
         if ($validation->run()) {
             $user->updateData($id);
             $this->session->set_flashdata('message', 'Berhasil mengganti data');

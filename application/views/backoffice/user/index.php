@@ -135,7 +135,23 @@
 										<td class="px-4 py-3"><?php echo $key + 1; ?></td>
 										<td class="px-4 py-3"><?=ucwords($item->nama)?></td>
 										<td class="px-4 py-3"><?=ucwords($item->username)?></td>
-										<td class="px-4 py-3"><?=ucwords($item->role)?></td>
+										<td class="px-4 py-3">
+											<?php
+												if ($item->role == 'admin') {
+													echo 'Admin';
+												}else if ($item->role == 'rm') {
+													echo 'Petugas Pendaftran';
+												}else if ($item->role == 'dokter') {
+													echo 'Dokter';
+												}else if ($item->role == 'perawat') {
+													echo 'Apoteker';
+												}else if ($item->role == 'kepala') {
+													echo 'Kepala Puskesmas';
+												}else{
+													echo 'Pengguna';
+												}
+											?>
+										</td>
 										<td class="px-4 py-3 flex items-center justify-end">
 											<button id="<?=$item->id?>-button" data-dropdown-toggle="<?=$item->id?>-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
 												<svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
