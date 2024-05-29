@@ -1,0 +1,13 @@
+AKUN 
+Admin
+- username : admin
+- password : password
+Petugas
+- username : petugas
+- password : password
+Dokter
+- username : dokter
+- password : password
+Apotek
+- username : apoteker
+- password : password

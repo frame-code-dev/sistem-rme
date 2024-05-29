@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 07:28 PM
+-- Generation Time: May 29, 2024 at 09:33 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -30,18 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `obat` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `satuan` varchar(20) DEFAULT NULL,
   `stok` bigint(20) NOT NULL,
+  `penerimaan_stok` bigint(20) DEFAULT 0,
   `dosis` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `obat`
---
-
-INSERT INTO `obat` (`id`, `name`, `stok`, `dosis`, `created_at`, `updated_at`) VALUES
-(1, 'Paracetamol', 100, '2xmakan', '2024-05-13 03:14:36', '2024-05-13 03:19:50');
 
 -- --------------------------------------------------------
 
@@ -51,36 +46,26 @@ INSERT INTO `obat` (`id`, `name`, `stok`, `dosis`, `created_at`, `updated_at`) V
 
 CREATE TABLE `pasien` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `no_rm` varchar(255) NOT NULL,
-  `nik` varchar(255) DEFAULT NULL,
-  `no_kk` varchar(255) DEFAULT NULL,
+  `name` varchar(200) NOT NULL,
+  `no_rm` varchar(20) NOT NULL,
+  `nik` varchar(16) DEFAULT NULL,
+  `no_kk` varchar(16) DEFAULT NULL,
   `jenis_pasien` enum('bpjs','umum') NOT NULL,
   `no_jkn` varchar(255) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `jenis_kelamin` enum('l','p') DEFAULT NULL,
-  `agama` varchar(255) DEFAULT NULL,
-  `no_hp` varchar(255) DEFAULT NULL,
-  `no_telp` varchar(255) DEFAULT NULL,
+  `agama` varchar(100) DEFAULT NULL,
+  `no_hp` varchar(13) DEFAULT NULL,
+  `no_telp` varchar(13) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
-  `pendidikan` varchar(255) DEFAULT NULL,
-  `pekerjaan` varchar(255) DEFAULT NULL,
-  `status_pernikahan` varchar(255) DEFAULT NULL,
+  `pendidikan` varchar(100) DEFAULT NULL,
+  `pekerjaan` varchar(100) DEFAULT NULL,
+  `status_pernikahan` varchar(100) DEFAULT NULL,
   `user_id` bigint(20) NOT NULL,
   `nomor_antrian` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pasien`
---
-
-INSERT INTO `pasien` (`id`, `name`, `no_rm`, `nik`, `no_kk`, `jenis_pasien`, `no_jkn`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `no_hp`, `no_telp`, `alamat`, `pendidikan`, `pekerjaan`, `status_pernikahan`, `user_id`, `nomor_antrian`, `created_at`, `updated_at`) VALUES
-(2, 'Rifjan', '000001', '3574042905000001', '3574041505080026', 'bpjs', '12412', '2024-05-07', 'l', 'hindu', '083846997665', '0912513', 'qwrqr', 'sltp', 'Mahasiswa', '1', 0, 1, '2024-05-14 12:30:50', NULL),
-(4, 'qwtq', '000002', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, 2, '2024-05-14 04:55:00', NULL),
-(5, 'qwtq', '000003', '3574042905000003', '3574041505080026', 'bpjs', '124124', '1970-01-01', 'l', 'islam', '089516325685', '124124', 'qwrqwr', 'sltp', 'Mahasiswa', '1', 0, NULL, '2024-05-13 13:06:51', NULL),
-(6, 'Rifjan', '000004', '3574042905000003', '3574041505080026', 'umum', '', '1970-01-01', 'l', 'kristen', '083846997665', '089516235685', 'afasf', 'slta', 'Petani', '1', 0, 2, '2024-05-13 13:12:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -91,28 +76,21 @@ INSERT INTO `pasien` (`id`, `name`, `no_rm`, `nik`, `no_kk`, `jenis_pasien`, `no
 CREATE TABLE `pemeriksaan_pasien` (
   `id` bigint(20) NOT NULL,
   `pasien_id` bigint(20) NOT NULL,
-  `keluhan_utama` text NOT NULL,
-  `riwayat_penyakit_sekarang` text NOT NULL,
-  `riwayat_penyakit_dahulu` text NOT NULL,
-  `riwayat_pengobatan` text NOT NULL,
-  `tekanan_darah` bigint(20) NOT NULL,
-  `nadi` bigint(20) NOT NULL,
-  `suhu` bigint(20) NOT NULL,
-  `rr` bigint(20) NOT NULL,
-  `tinggi_badan` bigint(20) NOT NULL,
-  `berat_badan` bigint(20) NOT NULL,
+  `keluhan_utama` text DEFAULT NULL,
+  `riwayat_penyakit_sekarang` text DEFAULT NULL,
+  `riwayat_penyakit_dahulu` text DEFAULT NULL,
+  `riwayat_pengobatan` text DEFAULT NULL,
+  `tekanan_darah` bigint(20) DEFAULT NULL,
+  `nadi` bigint(20) DEFAULT NULL,
+  `suhu` bigint(20) DEFAULT NULL,
+  `rr` bigint(20) DEFAULT NULL,
+  `tinggi_badan` bigint(20) DEFAULT NULL,
+  `berat_badan` bigint(20) DEFAULT NULL,
   `status_pemeriksaan` enum('pending','sukses','batal') NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pemeriksaan_pasien`
---
-
-INSERT INTO `pemeriksaan_pasien` (`id`, `pasien_id`, `keluhan_utama`, `riwayat_penyakit_sekarang`, `riwayat_penyakit_dahulu`, `riwayat_pengobatan`, `tekanan_darah`, `nadi`, `suhu`, `rr`, `tinggi_badan`, `berat_badan`, `status_pemeriksaan`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 'tidak ada ', 'asma', 'asma ', 'tidak ada ', 20, 10, 20, 10, 10, 10, 'pending', 0, '2024-05-14 05:01:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -130,14 +108,6 @@ CREATE TABLE `rekam_medis` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `rekam_medis`
---
-
-INSERT INTO `rekam_medis` (`id`, `pemeriksaan_id`, `diganosa_utama_code`, `diganosa_utama_name`, `catatan`, `created_at`, `updated_at`) VALUES
-(1, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', 'afaf', NULL, NULL),
-(2, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', 'qwrwqr', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -152,15 +122,6 @@ CREATE TABLE `rekam_medis_diagnosa` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `rekam_medis_diagnosa`
---
-
-INSERT INTO `rekam_medis_diagnosa` (`id`, `rekam_medis_id`, `diagnosa_sekunder_code`, `diagnosa_sekunder_name`, `created_at`, `updated_at`) VALUES
-(1, 1, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', NULL, NULL),
-(2, 2, 'B001', 'Herpesviral vesicular dermatitis', NULL, NULL),
-(3, 2, 'A001', 'Cholera due to Vibrio cholerae 01, biovar eltor', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -178,15 +139,6 @@ CREATE TABLE `rekam_medis_obat` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `rekam_medis_obat`
---
-
-INSERT INTO `rekam_medis_obat` (`id`, `rekam_medis_id`, `obat_id`, `qty`, `frekuensi`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 12, 'afasf', NULL, NULL),
-(2, 2, 1, 12, 'afasf', NULL, NULL),
-(3, 2, 1, 12, 'afasf', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -199,6 +151,7 @@ CREATE TABLE `users` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `role` enum('rm','dokter','admin','perawat','kepala') NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -207,9 +160,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(0, 'Rifjan', 'admin', '$2y$10$sJB2A.KkZaaeN5INZ42ZC.4cJrRLgZMlijhI/N6C7CPYAs0PBafci', 'admin', NULL, '2024-05-10 08:02:44'),
-(1, 'rifjan', 'admin', '$2y$10$77mXYZZUVIS5ZIN7RB/oN.rl63oNKPutUnbooOss/OSWytRtjDsDe', 'admin', '2024-05-09 05:01:48', NULL);
+INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role`, `avatar`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', '$2y$10$sJB2A.KkZaaeN5INZ42ZC.4cJrRLgZMlijhI/N6C7CPYAs0PBafci', 'admin', 'http://localhost/sistem-rme/upload/profile/admin_logoku.png', '2024-05-29 02:14:11', '2024-05-29 02:14:11'),
+(666, 'Kepala Puskesmas', 'kepala', '$2y$10$1iVj6X2haew.tezlEOvS2OLU0.EH0an7rYtoqi.vK7TrwMWhsHNRa', 'kepala', NULL, '2024-05-28 00:53:31', NULL),
+(667, 'petugas', 'petugas', '$2y$10$gGF6Hzd8ED1oJtkimVtCbOfVlT6rVCxLdvfXor5X22M9goNB.03ti', 'rm', NULL, '2024-05-28 01:01:12', NULL),
+(668, 'apoteker', 'apoteker', '$2y$10$XejfJ/1xn4kYkfyTrc/9YuvZvxmIzHQIcICMLNnya5nLKpSuZTyKS', 'perawat', NULL, '2024-05-28 01:01:31', NULL);
 
 --
 -- Indexes for dumped tables
@@ -265,43 +220,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pemeriksaan_pasien`
 --
 ALTER TABLE `pemeriksaan_pasien`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis`
 --
 ALTER TABLE `rekam_medis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis_diagnosa`
 --
 ALTER TABLE `rekam_medis_diagnosa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rekam_medis_obat`
 --
 ALTER TABLE `rekam_medis_obat`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=666;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=669;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
