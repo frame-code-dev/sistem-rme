@@ -39,13 +39,13 @@ class Pasien_model extends CI_Model
 			[
 				'field' => 'nik',
 				'label' => 'NIK',
-				'rules' => 'required'
+				'rules' => 'required|is_unique[pasien.nik]'
 				
 			],
 			[
 				'field' => 'no_kk',
 				'label' => 'No. KK',
-				'rules' => 'required'
+				'rules' => 'required|is_unique[pasien.no_kk]'
 				
 			],
 			[

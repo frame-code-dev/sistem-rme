@@ -136,15 +136,17 @@
 										<td class="px-4 py-3"><?=$item->name?></td>
 										<td class="px-4 py-3"><?=$item->satuan?></td>
 										<td class="px-4 py-3"><?=$item->stok?></td>
+									<!-- // Stok akhir = Persediaan - Pemakaian  -->
 										<?php
 											$persediaan = $item->penerimaan_stok + $item->stok;
 											// $pemakaian = $item->sisa_stok - $item->permintaan_stok;
 											// $permintaan = $item->permintaan_stok - $item->pemberian_stok;
+											$stok_akhir = $persediaan - $item->total;
 										?>
 										<td class="px-4 py-3"><?=$item->penerimaan_stok?></td>
 										<td class="px-4 py-3"><?=$persediaan?></td>
 										<td class="px-4 py-3"><?=$item->total?></td>
-										<td class="px-4 py-3"><?=$item->sisa_stok?></td>
+										<td class="px-4 py-3"><?=$stok_akhir?></td>
 										<td class="px-4 py-3"></td>
 										<td class="px-4 py-3"></td>
 										<td class="px-4 py-3"></td>

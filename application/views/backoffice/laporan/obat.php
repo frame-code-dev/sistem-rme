@@ -75,7 +75,7 @@
                                         <tr class="border-b dark:border-gray-700">
                                             <td class="px-4 py-3"><?php echo $key + 1; ?></td>
                                             <td class="px-4 py-3"><?=$item->name?></td>
-                                            <td class="px-4 py-3"><?=$item->sisa_stok?></td>
+                                            <td class="px-4 py-3"><?=$item->stok?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
