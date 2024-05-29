@@ -39,13 +39,13 @@ class Pasien_model extends CI_Model
 			[
 				'field' => 'nik',
 				'label' => 'NIK',
-				'rules' => 'required|is_unique[pasien.nik]'
+				'rules' => 'required|is_unique[pasien.nik]|max_length[16]|min_length[16]'
 				
 			],
 			[
 				'field' => 'no_kk',
 				'label' => 'No. KK',
-				'rules' => 'required|is_unique[pasien.no_kk]'
+				'rules' => 'required|is_unique[pasien.no_kk]|max_length[16]|min_length[16]'
 				
 			],
 			[
@@ -75,13 +75,13 @@ class Pasien_model extends CI_Model
 			[
 				'field' => 'no_hp',
 				'label' => 'No. HP',
-				'rules' => 'required'
+				'rules' => 'required|max_length[13]|min_length[13]'
 				
 			],
 			[
 				'field' => 'no_telp',
 				'label' => 'No. Telp',
-				'rules' => 'required'
+				'rules' => 'required|max_length[13]|min_length[13]'
 				
 			],
 			[
