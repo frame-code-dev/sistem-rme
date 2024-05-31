@@ -66,7 +66,7 @@
 									</li>
 							<?php } ?>
 							<?php
-								if ($current_user->role == 'rm' || $current_user->role == 'admin') {?>
+								if ($current_user->role == 'rm' || $current_user->role == 'admin' || $current_user->role == 'dokter') {?>
 								<li>
 									<a href="<?=base_url('pasienlist')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
 									<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -179,16 +179,24 @@
 					} ?>
 					<?php
 						if ($current_user->role == 'perawat' || $current_user->role == 'admin' || $current_user->role == 'kepala') {?>
-					<li>
-                        <a href="<?=base_url('laporan/obat')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
-                           <svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4"/>
-                           </svg>
-                           Laporan Obat
-                       </a>
-                    </li>
+						<li>
+							<a href="<?=base_url('laporan/obat')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
+							<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4"/>
+							</svg>
+							Laporan Obat
+						</a>
+						</li>
+					
 					<?php } ?>
-                  
+						<li>
+							<a href="<?=base_url('laporan/obat')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
+								<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4"/>
+								</svg>
+								Laporan Kesakitan
+							</a>
+						</li>
                 </ul>
             </li>
 			

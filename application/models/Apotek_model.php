@@ -23,6 +23,19 @@ class Apotek_model extends CI_Model
 
         return $data;
     }
+
+	public function historyPemeriksaan($id) {
+		$this->db->from($this->_table_pemeriksaan);
+        $this->db->order_by('pemeriksaan_pasien.status_pemeriksaan', 'sukses');
+		$this->db->where('pemeriksaan_pasien.pasien_id',$id);
+        $query = $this->db->get();
+        $data = $query->result();
+
+		return $data;
+	}
+	public function historyRekamMedis($id){
+		return $this->db->get_where($this->_table_rm, ["pemeriksaan_id" => $id])->row();
+	}
 	public function getDiagnosaById($id)
     {
         $this->db->from($this->_table_rm);

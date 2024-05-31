@@ -11,6 +11,7 @@ class Apotek extends CI_Controller
 		$this->load->model('Apotek_model');
 		$this->load->model('Pasien_model');
 		$this->load->model('Log_Model');
+		$this->load->model('Rekam_model');
 		$this->load->model('Obat_model');
 		$this->load->model('Pemeriksaan_model');
 		$this->load->library('form_validation');
@@ -43,10 +44,11 @@ class Apotek extends CI_Controller
 			$message = 'Berhasil mengambil data';
 			$diagnosa = $this->Apotek_model->getRekamDiagnosaByRekamId($rm_id);
 			$obat = $this->Apotek_model->getRekamObatByRekamId($rm_id);
-
+			$rekam = $this->Rekam_model->getById($rm_id);
 			$data = new stdClass;
 			$data->diagnosa = $diagnosa;
 			$data->obat = $obat;
+			$data->rekam = $rekam;
 		}
 		
 

@@ -74,9 +74,8 @@ class RekamMedis extends CI_Controller
 	public function history($id) {
 		$data['title'] = 'History Rekam Medis';
 		$data['current_user'] = $this->auth_model->current_user();
-		$data['data'] = $this->Rekam_model->getById($id);
-		$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
-		$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
+		$data['pasien'] = $this->Pasien_model->getById($id);
+		$data['history_pemeriksaan'] = $this->Apotek_model->historyPemeriksaan($id);
 		$this->load->view('backoffice/rekam-medis/history',$data);
 	}
 
