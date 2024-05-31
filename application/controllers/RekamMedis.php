@@ -9,6 +9,7 @@ class RekamMedis extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Pasien_model');
+		$this->load->model('Log_Model');
 		$this->load->model('Rekam_model');
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
@@ -42,11 +43,22 @@ class RekamMedis extends CI_Controller
 		$validation = $this->form_validation;
         $validation->set_rules('diganosa_utama_code', 'Diagnosa Utama Kode', 'required');
         $validation->set_rules('diganosa_utama_name', 'Diagnosa Utama Deskripsi', 'required');
+        $validation->set_rules('kasus', 'Kasus', 'required');
+		// LOG 
+		$data['data'] = $this->Rekam_model->getById($id);
+		$nama = $this->Pasien_model->getById($data['data']->pasien_id)->name;
+		$status = 'Pasien : '.$nama.' Dilayanin Apotek.';
+		$this->Log_Model->insert([
+			'pasien_id' => $data['data']->pasien_id,
+			'status' =>  $status,
+			'created_at' => date('Y-m-d H:i:s'),
+		]);
 		if ($validation->run()) {
 			$this->Rekam_model->save();
 			$this->session->set_flashdata('message', 'Berhasil menambahkan data.');
 			redirect('rekam-medis');
 		}else{
+			$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
 			$data['data'] = $this->Rekam_model->getById($id);
 			$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
 			$data['obat'] = $this->Obat_model->getAll();
@@ -57,6 +69,15 @@ class RekamMedis extends CI_Controller
 			$this->load->view('backoffice/rekam-medis/create', $data);
 		}
 
+	}
+
+	public function history($id) {
+		$data['title'] = 'History Rekam Medis';
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['data'] = $this->Rekam_model->getById($id);
+		$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
+		$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
+		$this->load->view('backoffice/rekam-medis/history',$data);
 	}
 
 	public function dataObat() {

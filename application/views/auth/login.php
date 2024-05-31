@@ -20,13 +20,11 @@
 		<section class="bg-gray-100 dark:bg-gray-900 h-screen">
 			<div class="grid grid-cols-1 lg:grid-cols-2">
 				<div class="relative flex flex-col justify-start overflow-hidden p-4 bg-white dark:bg-gray-800 sm:p-6 lg:p-8 h-screen space-y-4">
-					<div class="flex justify-between content-start self-start mt-10">
+					<div class="flex justify-center content-start self-start mt-10">
 						<div>
 							<img src="<?=base_url('public/assets/logo-1.png')?>" class="mx-auto align-" alt="">
 						</div>
-						<div>
-							<img src="<?=base_url('public/assets/logo-2.png')?>" class="mx-auto align-" alt="">
-						</div>
+					
 					</div>
 					<div class="text-center">
 						<h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Welcome Back</h1>

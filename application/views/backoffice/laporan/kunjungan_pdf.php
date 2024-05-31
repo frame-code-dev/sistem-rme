@@ -33,7 +33,7 @@
                 -moz-box-sizing: border-box;
             }
             p, table, ol{
-                font-size: 13.5pt;
+                font-size: 12px;
             }
             #customers {
             font-family: Arial, Helvetica, sans-serif;
@@ -51,8 +51,8 @@
             #customers tr:hover {background-color: #ddd;}
 
             #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             text-align: left;
             /* background-color: #424745; */
             }
@@ -113,7 +113,7 @@
         </div>
         <hr color="black">
         <div class="row">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-10 mx-auto">
                 <div class="content">
                     <h1 class="text-center p-0 m-0 fw-bold" style="font-size: 18px;">
                         <?=$title?> <br> POLI UMUM <br> TAHUN 2024
@@ -155,73 +155,46 @@
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
-                    </table>
-					<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-						<tbody class="w-full">
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Total Kunjungan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_kunjungan?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Umum</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_l + $data->total_umum_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_l?></td>
+                    </table> 
+					<table id="customers" class="mt-5">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Total Kunjungan</th>
+                                <th rowspan="2">Jumlah Pasien Umum</th>
+                                <th colspan="2" style="text-align: center;">Pasien Umum</th>
+                                <th rowspan="2">Jumlah Pasien BPJS</th>
+                                <th colspan="2" style="text-align: center;">Pasien BPJS</th>
+                                <th rowspan="2">Jumlah Pasien Baru</th>
+                                <th colspan="2" style="text-align: center;">Pasien Baru</th>
+                                <th rowspan="2">Jumlah Pasien Lama</th>
+                                <th colspan="2" style="text-align: center;">Pasien Lama</th>
                             </tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_umum_p?></td>
+							<tr>
+								<th>Laki-Laki</th>
+                                <th>Perempuan</th>
+								<th>Laki-Laki</th>
+                                <th>Perempuan</th>
+								<th>Laki-Laki</th>
+                                <th>Perempuan</th>
+								<th>Laki-Laki</th>
+                                <th>Perempuan</th>
 							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien BPJS</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_l + $data->total_bpjs_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_bpjs_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Baru</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_l + $data->total_pasien_baru_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_baru_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2 fw-bold">Jumlah Pasien Lama</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_l + $data->total_pasien_lama_p?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Laki-Laki</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_l?></td>
-							</tr>
-							<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-								<td width="30%" class="p-2">Perempuan</td>
-								<td width="1%">:</td>
-								<td class="font-bold"><?=$data->total_pasien_lama_p?></td>
+                        </thead>
+						<tbody>
+							<tr>
+								<td><?=$data->total_kunjungan?></td>
+								<td><?=$data->total_umum_l + $data->total_umum_p?></td>
+								<td><?=$data->total_umum_l?></td>
+								<td><?=$data->total_umum_p?></td>
+								<td><?=$data->total_bpjs_l + $data->total_bpjs_p?></td>
+								<td><?=$data->total_bpjs_l?></td>
+								<td><?=$data->total_bpjs_p?></td>
+								<td><?=$data->total_pasien_baru_l + $data->total_pasien_baru_p?></td>
+								<td><?=$data->total_pasien_baru_l?></td>
+								<td><?=$data->total_pasien_baru_p?></td>
+								<td><?=$data->total_pasien_lama_l + $data->total_pasien_lama_p?></td>
+								<td><?=$data->total_pasien_lama_l?></td>
+								<td><?=$data->total_pasien_lama_p?></td>
 							</tr>
 						</tbody>
 					</table>

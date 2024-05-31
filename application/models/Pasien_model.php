@@ -75,13 +75,101 @@ class Pasien_model extends CI_Model
 			[
 				'field' => 'no_hp',
 				'label' => 'No. HP',
-				'rules' => 'required|max_length[13]|min_length[13]'
+				'rules' => 'required|max_length[13]'
 				
 			],
 			[
 				'field' => 'no_telp',
 				'label' => 'No. Telp',
-				'rules' => 'required|max_length[13]|min_length[13]'
+				'rules' => 'required|max_length[13]'
+				
+			],
+			[
+				'field' => 'alamat',
+				'label' => 'Alamat',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'pendidikan',
+				'label' => 'Pendidikan',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'pekerjaan',
+				'label' => 'Pekerjaan',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'status_kawin',
+				'label' => 'Status Pernikahan',
+				'rules' => 'required'
+				
+			],
+        ];
+    }
+	public function edit_rules(){
+        return [
+			[
+				'field' => 'nama_pasien',
+				'label' => 'Nama Pasien',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'no_rm',
+				'label' => 'No. Rekam Medis',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'nik',
+				'label' => 'NIK',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'no_kk',
+				'label' => 'No. KK',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'jenis_pasien',
+				'label' => 'Jenis Pasien',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'tgl_lahir',
+				'label' => 'Tanggal Lahir',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'jenis_kelamin',
+				'label' => 'Jenis Kelamin',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'agama',
+				'label' => 'Agama',
+				'rules' => 'required'
+				
+			],
+			[
+				'field' => 'no_hp',
+				'label' => 'No. HP',
+				'rules' => 'required|max_length[13]'
+				
+			],
+			[
+				'field' => 'no_telp',
+				'label' => 'No. Telp',
+				'rules' => 'required|max_length[13]'
 				
 			],
 			[
@@ -195,7 +283,33 @@ class Pasien_model extends CI_Model
 	public function save() {
 		$post = $this->input->post();
 		$date = DateTime::createFromFormat('m-d-Y', $post["tgl_lahir"])->format('Y-m-d');
-
+		// foto ktp 
+		if ($_FILES["file_ktp"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_ktp"]["tmp_name"];
+			// Dapatkan nama file asli dan ekstrak ekstensi file
+			$originalFileName = $_FILES["file_ktp"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$Path = "upload/foto_ktp/";
+			$ImagePathKTP = $Path . str_replace('', '-', $post["nik"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathKTP);
+		}
+		// foto ktp 
+		if ($_FILES["file_kk"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_kk"]["tmp_name"];
+			$Path = "upload/foto_kk/";
+			$originalFileName = $_FILES["file_kk"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$ImagePathKK = $Path . str_replace('', '-', $post["nik"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathKK);
+		}
+		if ($_FILES["file_jkn"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_jkn"]["tmp_name"];
+			$Path = "upload/foto_jkn/";
+			$originalFileName = $_FILES["file_jkn"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$ImagePathJKN = $Path . str_replace('', '-', $post["no_jkn"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathJKN);
+		}
         $this->db->insert($this->_table,[
 			'name' => $post["nama_pasien"],
 			'no_rm' => $post["no_rm"],
@@ -213,6 +327,9 @@ class Pasien_model extends CI_Model
 			'pekerjaan' => $post["pekerjaan"],
 			'status_pernikahan' => $post["status_kawin"],
 			'nomor_antrian' => $post['nomor_antrian'],
+			'foto_kk' => !empty($_FILES['file_kk']['name']) ? base_url() . $ImagePathKK : null,
+			'foto_ktp' => !empty($_FILES['file_ktp']['name']) ? base_url() . $ImagePathKTP : null,
+			'foto_jkn' =>	!empty($_FILES['file_jkn']['name']) ? base_url() . $ImagePathJKN : null,
 			'user_id' => $this->session->userdata('user_id'),
 			'created_at' => date('Y-m-d H:i:s'),
 		]);
@@ -222,6 +339,34 @@ class Pasien_model extends CI_Model
 	public function updateData($id){
 		$post = $this->input->post();
 		$date = DateTime::createFromFormat('m-d-Y', $post["tgl_lahir"])->format('Y-m-d');
+		$current = $this->getById($id);
+		// foto ktp 
+		if ($_FILES["file_ktp"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_ktp"]["tmp_name"];
+			// Dapatkan nama file asli dan ekstrak ekstensi file
+			$originalFileName = $_FILES["file_ktp"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$Path = "upload/foto_ktp/";
+			$ImagePathKTP = $Path . str_replace('', '-', $post["nik"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathKTP);
+		}
+		// foto ktp 
+		if ($_FILES["file_kk"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_kk"]["tmp_name"];
+			$Path = "upload/foto_kk/";
+			$originalFileName = $_FILES["file_kk"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$ImagePathKK = $Path . str_replace('', '-', $post["nik"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathKK);
+		}
+		if ($_FILES["file_jkn"]["tmp_name"]) {
+			$base64Gambar = $_FILES["file_jkn"]["tmp_name"];
+			$Path = "upload/foto_jkn/";
+			$originalFileName = $_FILES["file_jkn"]["name"];
+			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+			$ImagePathJKN = $Path . str_replace('', '-', $post["no_kartu_jkn"]). $fileExtension;
+			move_uploaded_file($base64Gambar, $ImagePathJKN);
+		}
 		$this->db->update($this->_table, [
 			'name' => $post["nama_pasien"],
 			'no_rm' => $post["no_rm"],
@@ -239,6 +384,9 @@ class Pasien_model extends CI_Model
 			'pekerjaan' => $post["pekerjaan"],
 			'status_pernikahan' => $post["status_kawin"],
 			'user_id' => $this->session->userdata('user_id'),
+			'foto_kk' => !empty($_FILES['file_kk']['name']) ? base_url() . $ImagePathKK : $current->foto_kk,
+			'foto_ktp' => !empty($_FILES['file_ktp']['name']) ? base_url() . $ImagePathKTP : $current->foto_ktp,
+			'foto_jkn' =>	!empty($_FILES['file_jkn']['name']) ? base_url() . $ImagePathJKN : $current->foto_jkn,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		], array('id' => $id));

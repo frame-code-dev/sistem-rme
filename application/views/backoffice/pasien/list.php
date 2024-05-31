@@ -57,10 +57,10 @@
 											<div id="<?=$item->id?>-dropdown" class="hidden z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
 												<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="<?=$item->id?>-button">
 													<li>
-														<a href="<?=base_url('obat/edit/'.$item->id)?>" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-data">Edit</a>
+														<a href="<?=base_url('pasien/edit/'.$item->id)?>" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white edit-data">Edit</a>
 													</li>
 													<li>
-														<a href="#" onclick="deleteConfirm('<?php echo base_url('obat/delete/'.$item->id) ?>')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+														<a href="#" onclick="deleteConfirm('<?php echo base_url('pasien/delete/'.$item->id) ?>')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
 													</li>
 												</ul>
 											</div>

@@ -1,28 +1,31 @@
-<!DOCTYPE html>
 <html lang="">
     <head>
 		<?php $this->load->view("template/_partials/head") ?>
     </head>
     <body class=" text-gray-900">
-		
 		<?php $this->load->view("template/_partials/topbar") ?>
 		<?php $this->load->view("template/_partials/sidebar") ?>
 
 		<div class="p-4 sm:ml-64">
 			<div class="p-4 mt-14">
-				<section class="p-5 overflow-y-auto mt-5">
+				<section class="p-5 overflow-y-auto">
 					<div class="head lg:flex grid grid-cols-1 justify-between w-full">
 						<div class="heading flex-auto">
 							<p class="text-blue-950 font-sm text-xs">
-								Apotek
+								Rekam Medis
 							</p>
 							<h2 class="font-bold tracking-tighter text-2xl text-theme-text">
 								<?=$title?>
 							</h2>
 						</div>
 					</div>
-					<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
-                        <table class="display w-full text-sm text-left text-gray-500 dark:text-gray-400" id="datatable">
+					
+					<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
+						<div class="w-full bg-gray-100 p-3 rounded-md mb-5">
+							<h4 class="font-bold text-sm">History Diagnosa Pasien</h4>
+							<hr>
+						</div>
+						<table class="display w-full text-sm text-left text-gray-500 dark:text-gray-400" id="datatable">
 							<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 								<tr>
 									<th class="px-4 py-3">No</th>
@@ -38,7 +41,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($data as $key => $item): ?>
+								<?php foreach ($history_diagnosa as $key => $item): ?>
 									<tr class="border-b dark:border-gray-700">
 										<td class="px-4 py-3"><?php echo $key + 1; ?></td>
 										<td class="px-4 py-3"><?=ucwords($item->no_rm)?></td>
@@ -60,11 +63,6 @@
                                             data-rm_id="<?=$item->id?>">
                                                 Rincian
                                             </a>
-                                            <?php if ($item->status_pemeriksaan == 'pending') : ?>
-                                                <a href="<?=base_url('apotek/create/'.$item->id)?>" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                    Selesaikan
-                                                </a>
-                                            <?php endif; ?>
 										</td>
 									</tr>
 								<?php endforeach; ?>
@@ -76,7 +74,7 @@
 		</div>
 	</body>
 	<?php $this->load->view("template/_partials/script") ?>
-    <script>
+	<script>
         // Formatting function for row details - modify as you need
         function format(res) {            
             const response = JSON.parse(res)
@@ -100,10 +98,9 @@
                 $.each(obat, function(i, item) {
                     const name = item.name
                     const qty = item.qty
-                    const satuan = item.satuan != null ? item.satuan : '-'
                     const item_element = `
                         <div>
-                            <dd>- ${name} (${qty}) (${satuan})</dd>
+                            <dd>- ${name} (${qty})</dd>
                         </div>
                     `
                     obat_elements += (item_element)

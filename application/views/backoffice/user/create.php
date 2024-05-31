@@ -91,7 +91,7 @@
 									</div>
 								</div>
 								<div class="col-span-2">
-								<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Avatar</label>
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Avatar</label>
 									<div>
 										<figure class="max-w-lg">
 											<img src="https://flowbite.com/docs/images/examples/image-1@2x.jpg" class="h-96 max-w-full rounded-lg photosPreview">

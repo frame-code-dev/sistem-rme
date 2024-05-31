@@ -37,24 +37,28 @@ class Rekam_model extends CI_Model
 			'diganosa_utama_code' => $post['diganosa_utama_code'],
 			'diganosa_utama_name' => $post['diganosa_utama_name'],
 			'catatan' => $post['catatan'],
+			'kasus' => $post['kasus'],
 			'created_at' => $current_time,
 		]);
 		$id = $this->db->insert_id();
-		for ($i=0; $i < count($this->input->post('code_diagnosis_other')) ; $i++) { 
-			$this->db->insert($this->_table_rekam_medis_diagnosa,[
-				'rekam_medis_id' => $id,
-				'diagnosa_sekunder_code' => $this->input->post('code_diagnosis_other')[$i],
-				'diagnosa_sekunder_name' => $this->input->post('description_diagnosis_other')[$i],	
-				'created_at' => $current_time,
-
-			]);
-		};
+		if ($this->input->post('code_diagnosis_other') != null) {
+			for ($i=0; $i < count($this->input->post('code_diagnosis_other')) ; $i++) { 
+				$this->db->insert($this->_table_rekam_medis_diagnosa,[
+					'rekam_medis_id' => $id,
+					'diagnosa_sekunder_code' => $this->input->post('code_diagnosis_other')[$i],
+					'diagnosa_sekunder_name' => $this->input->post('description_diagnosis_other')[$i],	
+					'created_at' => $current_time,
+	
+				]);
+			};
+		}
 		for ($i=0; $i < count($post['obat']) ; $i++) { 
 			$this->db->insert($this->_table_rekam_medis_obat,[
 				'rekam_medis_id' => $id,
 				'obat_id' => $post['obat'][$i],
 				'frekuensi' => $post['frekuensi'][$i],	
 				'qty' => $post['qty'][$i],
+				'satuan' => $post['satuan'][$i],
 				'created_at' => $current_time,
 			]);
 		};

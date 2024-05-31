@@ -95,10 +95,27 @@
 									</div>
 								</div> 
 								<div class="col-span-2 hidden" id="no_jkn">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nomor Kartu JKN<span class="me-2 text-red-500">*</span></label>
-									<input type="text" placeholder="Masukkan Nomor Kartu JKN" value="<?=$data->no_jkn?>" name="no_kartu_jkn" id="no_kartu_jkn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('no_kartu_jkn') ?>
+									<div class="grid grid-cols-2 gap-3">
+										<div>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nomor Kartu JKN<span class="me-2 text-red-500">*</span></label>
+											<input type="text" placeholder="Masukkan Nomor Kartu JKN" value="<?=$data->no_jkn?>" name="no_kartu_jkn" id="no_kartu_jkn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+											<div class="text-red-500 text-xs italic font-semibold">
+												<?= form_error('no_kartu_jkn') ?>
+											</div>
+										</div>
+										<div class="">
+											<div>
+												<figure class="max-w-lg">
+													<img src="<?= $data->foto_jkn != null ? $data->foto_jkn : "https://flowbite.com/docs/images/examples/image-1@2x.jpg"?>" class="h-96 max-w-full rounded-lg photosPreview">
+													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
+												</figure>
+											</div>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto Kartu JKN<span class="me-2 text-red-500">*</span></label>
+											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_jkn" aria-describedby="file_input_help"
+												id="file_jkn"
+												type="file"
+												name="file_jkn">
+										</div>
 									</div>
 								</div>
 								<div class="grid grid-cols-2 gap-3 col-span-3">
@@ -175,6 +192,36 @@
 								<div class="col-span-3">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Alamat<span class="me-2 text-red-500">*</span></label>
 									<textarea name="alamat" id="alamat" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Alamat"><?=$data->alamat?></textarea>
+								</div>
+								<div class="col-span-3">
+									<div class="grid grid-cols-2 gap-3">
+										<div class="">
+											<div>
+												<figure class="max-w-lg">
+													<img src="<?= $data->foto_ktp != null ? $data->foto_ktp : "https://flowbite.com/docs/images/examples/image-1@2x.jpg"?>" class="h-96 max-w-full rounded-lg photosPreview">
+													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
+												</figure>
+											</div>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KTP<span class="me-2 text-red-500">*</span></label>
+											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_ktp" aria-describedby="file_input_help"
+												id="file_ktp"
+												type="file"
+												name="file_ktp">
+										</div>
+										<div class="">
+											<div>
+												<figure class="max-w-lg">
+													<img src="<?= $data->foto_kk != null ? $data->foto_kk : "https://flowbite.com/docs/images/examples/image-1@2x.jpg"?>" class="h-96 max-w-full rounded-lg photosPreview">
+													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
+												</figure>
+											</div>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KK<span class="me-2 text-red-500">*</span></label>
+											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_kk" aria-describedby="file_input_help"
+												id="file_kk"
+												type="file"
+												name="file_kk">
+										</div>
+									</div>
 								</div>
 								
 							</div>

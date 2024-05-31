@@ -9,6 +9,8 @@ class Apotek extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Apotek_model');
+		$this->load->model('Pasien_model');
+		$this->load->model('Log_Model');
 		$this->load->model('Obat_model');
 		$this->load->model('Pemeriksaan_model');
 		$this->load->library('form_validation');
@@ -66,7 +68,6 @@ class Apotek extends CI_Controller
 		$obat = $this->Apotek_model->getRekamObatByRekamId($rm_id);
 		$data['rm'] = $rm_data;
 		$data['obat'] = $obat;
-
 		$this->load->view('backoffice/apotek/create', $data);
 	}
 
@@ -102,6 +103,15 @@ class Apotek extends CI_Controller
 			// Update status pemeriksaan
 			$this->Pemeriksaan_model->updateStatus($pemeriksaan_id, 'sukses');
 			$this->db->trans_complete();
+
+			// LOG 
+			$nama = $this->Pasien_model->getById($form['pasien_id'])->name;
+			$status = 'Pasien : '.$nama.' Selesai Dilayani.';
+			$this->Log_Model->insert([
+				'pasien_id' => $form['pasien_id'],
+				'status' =>  $status,
+				'created_at' => date('Y-m-d H:i:s'),
+			]);
             $this->session->set_flashdata('message', 'Berhasil menyelesaikan antrean');
 			redirect('apotek/index');
 		}

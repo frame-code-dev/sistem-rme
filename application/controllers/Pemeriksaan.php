@@ -12,6 +12,7 @@ class Pemeriksaan extends CI_Controller
 		$this->load->model('Pemeriksaan_model');
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
+		$this->load->model('Log_Model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -27,6 +28,7 @@ class Pemeriksaan extends CI_Controller
         $data['total_diperiksa'] = $this->Pasien_model->getTotalPasienDiperiksa();
         $data['total_pasien_today'] = $this->Pasien_model->getTotalPasienToday();
 
+		$data['log'] = $this->Log_Model->getAll();
 		$this->load->view('backoffice/pemeriksaan/index', $data);
 	}
     

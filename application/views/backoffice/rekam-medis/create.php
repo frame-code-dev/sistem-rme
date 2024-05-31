@@ -3,7 +3,6 @@
 		<?php $this->load->view("template/_partials/head") ?>
     </head>
     <body class=" text-gray-900">
-		
 		<?php $this->load->view("template/_partials/topbar") ?>
 		<?php $this->load->view("template/_partials/sidebar") ?>
 		<div class="p-4 sm:ml-64">
@@ -243,6 +242,15 @@
 									<textarea id="message" rows="4" name="catatan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
 								</div>
 								<div class="col-span-2">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kasus</label>
+									<select id="kasus" name="kasus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+										<option value="">Pilih Kasus</option>
+										<option value="Kasus Lama" >Kasus Lama</option>
+										<option value="Kasus Baru" >Kasus Baru</option>
+										
+									</select>
+								</div>
+								<div class="col-span-2">
 									<div class="flex justify-between w-full bg-gray-100 p-3 rounded-md">
 										<div>
 											<h4 class="font-bold text-sm">Diagnosa Sekunder</h4>
@@ -281,7 +289,7 @@
 										</div>
 									</div>
 									<div id="formContainer">
-										<div class="row form-row my-3 grid grid-cols-4 content-center gap-3">
+										<div class="row form-row my-3 grid grid-cols-5 content-center gap-3">
 											<div class="form-group col-md-4">
 												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Obat<span class="me-2 text-red-500">*</span></label>
 												<select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 obat-select" name="obat[]" required>
@@ -299,6 +307,10 @@
 											<div class="form-group col-md-3">
 												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Qty<span class="me-2 text-red-500">*</span></label>
 												<input type="number" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 qty-input" name="qty[]" required min="1">
+											</div>
+											<div class="form-group col-md-3">
+												<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Satuan<span class="me-2 text-red-500">*</span></label>
+												<input type="text" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 satuan-input" name="satuan[]" required>
 											</div>
 											<div class="form-group col-md-2 flex align-bottom content-end items-end">
 												<button type="button" class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 remove-btn">Hapus</button>
@@ -328,7 +340,7 @@
             // Menambahkan form dinamis ketika tombol "Add Form" ditekan
             $('#addBtn').click(function() {
                 var formRow = `
-							<div class="row form-row my-3 grid grid-cols-4 content-center gap-3">
+							<div class="row form-row my-3 grid grid-cols-5 content-center gap-3">
 								<div class="form-group col-md-4">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Nama Obat<span class="me-2 text-red-500">*</span></label>
 									<select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 obat-select" name="obat[]" required>
@@ -342,6 +354,10 @@
 								<div class="form-group col-md-3">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Qty<span class="me-2 text-red-500">*</span></label>
 									<input type="number" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 qty-input" name="qty[]" required min="1">
+								</div>
+								<div class="form-group col-md-3">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Satuan<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan Data" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 satuan-input" name="satuan[]" required min="1">
 								</div>
 								<div class="form-group col-md-2 flex align-bottom content-end items-end">
 									<button type="button" class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 remove-btn">Hapus</button>

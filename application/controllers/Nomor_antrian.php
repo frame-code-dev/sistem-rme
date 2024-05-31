@@ -8,6 +8,7 @@ class Nomor_antrian extends CI_Controller {
         $this->load->model('Pasien_model');
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
+		$this->load->model('Log_Model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -57,6 +58,14 @@ class Nomor_antrian extends CI_Controller {
 		$update->updateDataAntrian($id);
 		$this->db->insert('pemeriksaan_pasien',[
 			'pasien_id' => $id,
+		]);
+		// Log 
+		$nama = $this->Pasien_model->getById($id)->name;
+		$status = 'Pasien : '.$nama.' Menunggu dilayanin dokter.';
+		$this->Log_Model->insert([
+			'pasien_id' => $id,
+			'status' =>  $status,
+			'created_at' => date('Y-m-d H:i:s'),
 		]);
 		$this->session->set_flashdata('message', 'Berhasil mendaftarkan.');
 		redirect('nomor_antrian/index/' . $id);

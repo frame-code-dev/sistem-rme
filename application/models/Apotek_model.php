@@ -52,7 +52,7 @@ class Apotek_model extends CI_Model
     {
         $this->db->from($this->_table_rm_obat);
         $this->db->join($this->_table_obat, 'obat.id = rekam_medis_obat.obat_id');
-        $this->db->select('obat.id, obat.name, rekam_medis_obat.qty, rekam_medis_obat.frekuensi');
+        $this->db->select('obat.id, obat.name, rekam_medis_obat.qty, rekam_medis_obat.frekuensi, rekam_medis_obat.satuan');
         $this->db->where('rekam_medis_obat.rekam_medis_id', $rekam_id);
 
         $query = $this->db->get();
@@ -65,6 +65,7 @@ class Apotek_model extends CI_Model
         $this->db->join($this->_table_pemeriksaan.' AS pemeriksaan', 'pemeriksaan.id = rekam_medis.pemeriksaan_id');
         $this->db->join($this->_table_pasien.' AS pasien', 'pemeriksaan.pasien_id = pasien.id');
 		$this->db->select('
+            pasien.id as id_pasien,
             pasien.name,
             pasien.nik,
             pasien.no_jkn,

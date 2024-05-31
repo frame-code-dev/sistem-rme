@@ -56,6 +56,7 @@
 						<form action="<?=base_url('apotek/store')?>" method="POST" class="w-full mx-auto mt-4 space-y-4" enctype="multipart/form-data">
                             <input type="hidden" name="rm_id" value="<?=$rm->id?>">
                             <input type="hidden" name="pemeriksaan_id" value="<?=$rm->pemeriksaan_id?>">
+                            <input type="hidden" name="pasien_id" value="<?=$rm->id_pasien?>">
                             <div class="mt-5">
                                 <b>Data Pasien</b>
                             </div>

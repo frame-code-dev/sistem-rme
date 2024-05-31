@@ -11,6 +11,7 @@ class Pasien extends CI_Controller
 		$this->load->model('Pasien_model');
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
+		$this->load->model('Log_Model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -65,6 +66,14 @@ class Pasien extends CI_Controller
 			$this->db->insert('pemeriksaan_pasien',[
 				'pasien_id' => $pasien_id,
 			]);
+			// LOG 
+			$nama = $this->Pasien_model->getById($pasien_id)->name;
+			$status = 'Pasien : '.$nama.' Menunggu dilayanin dokter.';
+			$this->Log_Model->insert([
+				'pasien_id' => $pasien_id,
+				'status' =>  $status,
+				'created_at' => date('Y-m-d H:i:s'),
+			]);
             $this->session->set_flashdata('message', 'Berhasil menambahkan data.');
 			redirect('nomor_antrian/index/' . $pasien_id);
         }else{
@@ -87,7 +96,7 @@ class Pasien extends CI_Controller
        
         $pasien = $this->Pasien_model;
         $validation = $this->form_validation;
-        $validation->set_rules($pasien->rules());
+        $validation->set_rules($pasien->edit_rules());
 
         if ($validation->run()) {
             $pasien->updateData($id);
@@ -95,6 +104,7 @@ class Pasien extends CI_Controller
 			redirect('pasien');
         }else{
 			$data['title'] = 'Edit Pasien';
+			$data['current_user'] = $this->auth_model->current_user();
 			$data['current_page'] = 'List Pasien';
 			$data["data"] = $pasien->getById($id);
 			
