@@ -43,10 +43,10 @@
                             <div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
                                 <?php if (count($data) > 0): ?>
                                     <div>
-                                        <a href="<?=base_url('laporan/kunjungan/pdf?dari='.$_GET['dari'].'&sampai='.$_GET['sampai'])?>" class="bg-white text-yellow-400 hover:text-yellow-600 border border-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900" target="_blank" type="button">Cetak PDF</a>
+                                        <a href="<?=base_url('laporan/kesakitan/pdf?dari='.$_GET['dari'].'&sampai='.$_GET['sampai'])?>" class="bg-white text-yellow-400 hover:text-yellow-600 border border-yellow-400 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-600 dark:focus:ring-yellow-900" target="_blank" type="button">Cetak PDF</a>
                                     </div>
 									<div>
-                                        <a download="" href="<?=base_url('laporan/kunjungan/excel?dari='.$_GET['dari'].'&sampai='.$_GET['sampai'])?>" class="bg-white text-green-400 hover:text-green-600 border border-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900" target="_blank" type="button">Cetak Excel</a>
+                                        <a download="" href="<?=base_url('laporan/kesakitan/excel?dari='.$_GET['dari'].'&sampai='.$_GET['sampai'])?>" class="bg-white text-green-400 hover:text-green-600 border border-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900" target="_blank" type="button">Cetak Excel</a>
                                     </div>
                                 <?php endif; ?>
                                 <div>
@@ -119,6 +119,26 @@
 											?>
 											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganBaruL($filter,null,'L',$value->tgl_daftar)?></td>
 											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganBaruP($filter,null,'P',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganLamaL($filter,null,'L',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganLamaP($filter,null,'P',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganBaruUsiaL($filter,null,'L',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganBaruUsiaP($filter,null,'P',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganLamaUsiaL($filter,null,'L',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganLamaUsiaP($filter,null,'P',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienUmumL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienUmumP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienBpjsL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienBpjsP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusBaruL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusBaruP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusLamaL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusLamaP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusLamaL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusLamaP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusBaruL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKasusBaruP($filter,null,'p',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganKasusL($filter,null,'l',$value->tgl_daftar)?></td>
+											<td class="border p-2 text-xs"><?=$this->Laporan_model->pasienKunjunganKasusP($filter,null,'p',$value->tgl_daftar)?></td>
 										</tr>
 									<?php endforeach; ?>
                                 </tbody>

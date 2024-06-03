@@ -383,12 +383,7 @@ class Laporan extends CI_Controller
             
             // retrieve data
             $list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
-			// foreach ($list->list as $key => $value) {
-			// 	echo json_encode($this->Laporan_model->pasienKunjunganBaru($value->jenis_kelamin, $value->tgl_daftar)[0]);
-			// }
-			// echo json_encode($list);
             $data['data'] = $list;
-			// echo json_encode($data['data']);
             $this->load->view('backoffice/laporan/kesakitan', $data);
         }
         else {
@@ -422,20 +417,20 @@ class Laporan extends CI_Controller
 			 }
  
 			 // retrieve data
-			 $result = $this->Laporan_model->stokObat($filter);
-			 $data['data'] = $result;
+			 $list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
+			 $data['data'] = $list;
  
-			 $this->load->view('backoffice/laporan/obat_pdf',$data);
+			 $this->load->view('backoffice/laporan/kesakitan_pdf',$data);
 		 }
 		 else {
 			 $data['data'] = [];
-			 $this->load->view('backoffice/laporan/obat', $data);
+			 $this->load->view('backoffice/laporan/kesakitan', $data);
 		 }
 	}
 	public function laporanKesakitanExcel() {
 		// init page
 		$data['current_user'] = $this->auth_model->current_user();
-		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+		$data['title'] = "LAPORAN KESAKITAN";
 
 		// form validation
 		$this->form_validation->set_data($this->input->get());
@@ -458,14 +453,14 @@ class Laporan extends CI_Controller
 			}
 
 			// retrieve data
-			$result = $this->Laporan_model->stokObat($filter);
-			$data['data'] = $result;
+			$list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
+			$data['data'] = $list;
 
-			$this->load->view('backoffice/laporan/obat_excel',$data);
+			$this->load->view('backoffice/laporan/kesakitan_excel',$data);
 		}
 		else {
 			$data['data'] = [];
-			$this->load->view('backoffice/laporan/obat', $data);
+			$this->load->view('backoffice/laporan/kesakitan', $data);
 		}
    }
 

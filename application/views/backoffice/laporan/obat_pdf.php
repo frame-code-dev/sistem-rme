@@ -160,6 +160,6 @@
         </div>
     </body>
     <script>
-        // print();
+		window.print();
     </script>
 </html>

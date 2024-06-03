@@ -103,6 +103,7 @@ class Laporan_model extends CI_Model
 				$this->db->where('DATE(pemeriksaan_pasien.created_at) BETWEEN "'. date('Y-m-d', strtotime($dari)). '" and "'. date('Y-m-d', strtotime($sampai)).'"');
             }
 		}
+		$this->db->group_by('pemeriksaan_pasien.pasien_id');
 		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
 		$query = $this->db->get();
         $data = $query->result();
@@ -132,20 +133,565 @@ class Laporan_model extends CI_Model
 		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
 		$query = $this->db->get();
         $data = $query->result();
-		foreach ($data as $value) {
-			if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) == date('d-m-Y'))
-				$jumlah_kunjungan_baru_l++;
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) == date('d-m-Y')){
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		} else {
+			return 0;
 		}
 		
-		return $jumlah_kunjungan_baru_l;
+		
 	}
-	public function pasienKunjunganBaruP($status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+	public function pasienKunjunganBaruP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
 		$jumlah_kunjungan_baru_p = 0;
-		if ($jenis_kelamin == 'p' && date('d-m-Y', strtotime($tgl_daftar)) == date('d-m-Y'))
-			$jumlah_kunjungan_baru_p++;
-		return $jumlah_kunjungan_baru_p;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p' && date('d-m-Y', strtotime($value->tgl_daftar)) == date('d-m-Y')){
+					$jumlah_kunjungan_baru_p++;
+	
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return 0;
+		}
+	}
+	public function pasienKunjunganLamaL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) < date('d-m-Y')){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienKunjunganLamaP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($jenis_kelamin == 'p' && date('d-m-Y', strtotime($tgl_daftar)) < date('d-m-Y')){
+					$jumlah_kunjungan_baru_p++;
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return $jumlah_kunjungan_baru_p;
+
+		}
+	}
+	public function pasienKunjunganBaruUsiaL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik,pasien.umur, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		
+		$this->db->where('pasien.umur >=', 60);
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) == date('d-m-Y')){
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		} else {
+			return $jumlah_kunjungan_baru_l;
+		}
+		
+		
+	}
+	public function pasienKunjunganBaruUsiaP($filter,$status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik,pasien.umur, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.umur >=', 60);
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($jenis_kelamin == 'p' && date('d-m-Y', strtotime($tgl_daftar)) == date('d-m-Y'))
+					$jumlah_kunjungan_baru_p++;
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return $jumlah_kunjungan_baru_p;
+		}
+		
 	}
 
+	public function pasienKunjunganLamaUsiaL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.umur >=', 60);
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) < date('d-m-Y')){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienKunjunganLamaUsiaP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.umur >=', 60);
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($jenis_kelamin == 'p' && date('d-m-Y', strtotime($tgl_daftar)) < date('d-m-Y')){
+					$jumlah_kunjungan_baru_p++;
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return $jumlah_kunjungan_baru_p;
+
+		}
+	}
+	public function pasienUmumL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.jenis_pasien =', 'umum');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienUmumP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.jenis_pasien =', 'umum');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienBpjsL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.jenis_pasien =', 'bpjs');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l'){
+					$jumlah_kunjungan_baru_p++;
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return $jumlah_kunjungan_baru_p;
+
+		}
+	}
+	public function pasienBpjsP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('pasien.jenis_pasien =', 'bpjs');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p'){
+					$jumlah_kunjungan_baru_p++;
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return $jumlah_kunjungan_baru_p;
+
+		}
+	}
+	public function pasienKasusBaruL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('rekam_medis.kasus =', 'Kasus Baru');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienKasusBaruP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('rekam_medis.kasus =', 'Kasus Baru');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienKasusLamaL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('rekam_medis.kasus =', 'Kasus Lama');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+	public function pasienKasusLamaP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->where('rekam_medis.kasus =', 'Kasus Lama');
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p'){
+	
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		}else{
+			return 0;
+		}
+		
+	}
+
+	public function pasienKunjunganKasusL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'l'){
+					$jumlah_kunjungan_baru_l++;
+				}
+			}
+			return $jumlah_kunjungan_baru_l;
+		} else {
+			return 0;
+		}
+		
+		
+	}
+	public function pasienKunjunganKasusP($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->join('rekam_medis', 'rekam_medis.pemeriksaan_id = pemeriksaan_pasien.id');
+		$this->db->select('rekam_medis.kasus, pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		if ($data) {
+			foreach ($data as $value) {
+				if ($value->jenis_kelamin == 'p'){
+					$jumlah_kunjungan_baru_p++;
+	
+				}
+			}
+			return $jumlah_kunjungan_baru_p;
+		}else{
+			return 0;
+		}
+	}
 	public function stokObat($filter=null){
 		$this->db->from($this->_table_rm);
         $this->db->join($this->_table_pemeriksaan,'pemeriksaan_pasien.id = rekam_medis.pemeriksaan_id');
