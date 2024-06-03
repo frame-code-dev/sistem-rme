@@ -71,6 +71,7 @@ class Pemeriksaan extends CI_Controller
         }
         else {
             $data['pasien'] = $this->Pasien_model->getById($this->input->post()['pasien_id']);
+			$data['current_pemeriksaan'] = $this->Pemeriksaan_model->getById($this->input->post()['pasien_id']);
             $this->load->view('backoffice/pemeriksaan/create', $data);
 		}
     }

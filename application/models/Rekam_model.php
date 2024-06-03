@@ -38,6 +38,7 @@ class Rekam_model extends CI_Model
 			'diganosa_utama_name' => $post['diganosa_utama_name'],
 			'catatan' => $post['catatan'],
 			'kasus' => $post['kasus'],
+			'kondisi_pulang' => $post['kondisi_pulang'],
 			'created_at' => $current_time,
 		]);
 		$id = $this->db->insert_id();

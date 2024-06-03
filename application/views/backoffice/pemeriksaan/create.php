@@ -116,6 +116,28 @@
 										<?= form_error('riwayat_pengobatan') ?>
 									</div>
 								</div>
+								<div>
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Riwayat Alergi <span class="me-2 text-red-500">*</span></label>
+									<select id="riwayat_alergi" name="riwayat_alergi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+										<option value="0">Pilih Riwayat</option>
+										<option value="tidak ada" >Tidak Ada</option>
+										<option value="obat" >Obat</option>
+										<option value="makanan" >Makanan</option>
+										<option value="lain-lain" >Lain-Lain</option>
+									</select>
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('riwayat_alergi') ?>
+									</div>
+								</div>
+								<div>
+									<div class="hidden" id="deskripsi_riwayat_alergi">
+										<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Riwayat Alergi Deskripsi<span class="me-2 text-red-500">*</span></label>
+										<textarea name="text_riwayat_alergi" id="text_riwayat_alergi" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Deskripsi Riwayat Alergi"></textarea>
+									</div>
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('text_riwayat_alergi') ?>
+									</div>
+								</div>
 							</div>
                             <hr>
                             <div class="mt-5">
@@ -194,6 +216,92 @@
 										<?= form_error('berat_badan') ?>
 									</div>
 								</div>
+								<div>
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Status Psikologis <span class="me-2 text-red-500">*</span></label>
+									<select id="status_psikologis" name="status_psikologis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+										<option value="0">Pilih Riwayat</option>
+										<option value="tidak ada" >Tidak Ada</option>
+										<option value="cemas" >Cemas</option>
+										<option value="takut" >Takut</option>
+										<option value="marah" >Marah</option>
+										<option value="sedih" >Sedih</option>
+									</select>
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('status_psikologis') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Skala Nyeri<span class="me-2 text-red-500">*</span></label>
+									<input type="number" min="0" max="10" placeholder="Masukkan disini..." name="skala_nyeri" id="skala_nyeri" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('skala_nyeri') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Tingkat Kesadaran<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="tingkat_kesadaran" id="tingkat_kesadaran" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('tingkat_kesadaran') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kulit<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="kulit" id="kulit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('kulit') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kepala<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="kepala" id="kepala" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('kepala') ?>
+									</div>
+								</div>
+								
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Thorax <span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="thorax" id="thorax" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('thorax') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Abdomen <span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="abdomen" id="abdomen" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('abdomen') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Genetalia <span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="genetalia" id="genetalia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('genetalia') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Ekstremitas Atas <span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="ekstremitas_atas" id="ekstremitas_atas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('ekstremitas_atas') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Ekstremitas Bawah <span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="ekstremitas_bawah" id="ekstremitas_bawah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('ekstremitas_bawah') ?>
+									</div>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Spine<span class="me-2 text-red-500">*</span></label>
+									<input type="text" placeholder="Masukkan disini..." name="spine" id="spine" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<div class="text-red-500 text-xs italic font-semibold">
+										<?= form_error('spine') ?>
+									</div>
+								</div>
+
 							</div>
 							<div class="flex justify-end align-middle content-center bg-gray-100 p-3 rounded-md">
 								<div>
@@ -211,5 +319,18 @@
 		</div>
 	</body>
 	<?php $this->load->view("template/_partials/script") ?>
+	<script>
+		$(document).ready(function() {
+			$('#riwayat_alergi').on('change', function() {
+				let data = this.value;
+				console.log(data);
+				if (data == 'tidak ada' || data == '0') {
+					$('#deskripsi_riwayat_alergi').addClass('hidden');
+				} else {
+					$('#deskripsi_riwayat_alergi').removeClass('hidden');
+				}
+			})
+		});
+	</script>
 
 </html>

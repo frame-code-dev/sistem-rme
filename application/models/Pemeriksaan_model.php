@@ -86,7 +86,68 @@ class Pemeriksaan_model extends CI_Model
 				'label' => 'Berat Badan',
 				'rules' => 'required'
 				
-			]
+			],
+			[
+				'field' => 'riwayat_alergi',
+				'label' => 'riwayat_alergi',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'status_psikologis',
+				'label' => 'status_psikologis',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'skala_nyeri',
+				'label' => 'skala_nyeri',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'tingkat_kesadaran',
+				'label' => 'tingkat_kesadaran',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kulit',
+				'label' => 'kulit',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'kepala',
+				'label' => 'kepala',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'thorax',
+				'label' => 'thorax',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'abdomen',
+				'label' => 'abdomen',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'genetalia',
+				'label' => 'genetalia',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ekstremitas_atas',
+				'label' => 'ekstremitas_atas',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'ekstremitas_bawah',
+				'label' => 'ekstremitas_bawah',
+				'rules' => 'required',
+			],
+			[
+				'field' => 'spine',
+				'label' => 'spine',
+				'rules' => 'required',
+			],
+
         ];
     }
 
@@ -155,6 +216,19 @@ class Pemeriksaan_model extends CI_Model
 			'berat_badan' => $post["berat_badan"],
 			'status_pemeriksaan' => 'pending',
 			'user_id' => $this->session->userdata('user_id'),
+			'riwayat_alergi' => $post["riwayat_alergi"],
+			'status_psikologis' => $post["status_psikologis"],
+			'skala_nyeri' => $post["skala_nyeri"],
+			'tingkat_kesadaran' => $post["tingkat_kesadaran"],
+			'kulit' => $post["kulit"],
+			'kepala' => $post["kepala"],
+			'thorax' => $post["thorax"],
+			'abdomen' => $post["abdomen"],
+			'genetalia' => $post["genetalia"],
+			'ekstremitas_atas' => $post["ekstremitas_atas"],
+			'ekstremitas_bawah' => $post["ekstremitas_bawah"],
+			'spine' => $post["spine"],
+			'text_riwayat_alergi' => $post["text_riwayat_alergi"],
 			'created_at' => date('Y-m-d H:i:s'),
 		], array('id' => $post["id"]));
 		return $this->db->insert_id();

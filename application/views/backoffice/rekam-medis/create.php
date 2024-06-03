@@ -116,6 +116,13 @@
 										<td class="font-bold"><?=$data->riwayat_pengobatan?></td>
 									</tr>
 								</tbody>
+								<tbody class="border p-4 w-full">
+									<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+										<td width="20%" class="p-4">Riwayat Alergi Alergi</td>
+										<td width="1%">:</td>
+										<td class="font-bold"><?=$data->text_riwayat_alergi != null ? $data->text_riwayat_alergi : '-'?></td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 						<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
@@ -124,40 +131,106 @@
 								<hr>
 							</div>
 							<div class="col-span-1 w-full">
-								<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-									<tbody class="border p-4 w-full">
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">Tekanan Darah</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->tekanan_darah?> mmhg</td>
-										</tr>
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">Nadi</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->nadi?> x/menit</td>
-										</tr>
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">Suhu</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->suhu?>  C</td>
-										</tr>
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">RR</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->rr?> x/menit</td>
-										</tr>
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">Tinggi Badan</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->tinggi_badan?> cm</td>
-										</tr>
-										<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-											<td width="20%" class="p-4">Berat Badan</td>
-											<td width="1%">:</td>
-											<td class="font-bold"><?=$data->berat_badan?> kg</td>
-										</tr>
-									</tbody>
-								</table>
+								<div class="grid grid-cols-2 gap-2">
+									<div>
+										<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+											<tbody class="border p-4 w-full">
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Tekanan Darah</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->tekanan_darah?> mmhg</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Nadi</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->nadi?> x/menit</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Suhu</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->suhu?>  C</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">RR</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->rr?> x/menit</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Tinggi Badan</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->tinggi_badan?> cm</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Berat Badan</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->berat_badan?> kg</td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Status Psikologis</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->status_psikologis?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Skala Nyeri</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->skala_nyeri?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Tingkat Kesadaran</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->tingkat_kesadaran?></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div>
+										<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+											<tbody class="border p-4 w-full">
+												
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Kulit</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->kulit?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Kepala</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->kepala?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Thorax</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->thorax?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Abdomen</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->abdomen?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Genetalia</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->genetalia?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Ekstremitas Atas</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->ekstremitas_atas?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Ekstremitas Bawah</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->ekstremitas_bawah?></td>
+												</tr>
+												<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+													<td width="20%" class="p-4">Spine</td>
+													<td width="1%">:</td>
+													<td class="font-bold"><?=$data->spine?></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -176,6 +249,7 @@
 									<th scope="col" class="px-4 py-3">No. JKN</th>
 									<th scope="col" class="px-4 py-3">Nama</th>
 									<th scope="col" class="px-4 py-3">Diagnosa</th>
+									<th scope="col" class="px-4 py-3">Kondisi Pulang</th>
 									<th scope="col" class="px-4 py-3">Status</th>
 									<th scope="col" class="px-4 py-3">
 										<span class="sr-only">Actions</span>
@@ -191,6 +265,7 @@
 										<td class="px-4 py-3"><?=$item->no_jkn != null ? $item->no_jkn : '-'?></td>
 										<td class="px-4 py-3"><?=ucwords($item->name)?></td>
 										<td class="px-4 py-3"><?=ucwords($item->diagnosa_name)?></td>
+										<td class="px-4 py-3"><?=ucwords($item->kondisi_pulang)?></td>
 										<td class="px-4 py-3">
                                             <?php if ($item->status_pemeriksaan == 'sukses') : ?>
                                                 <span class="text-green-400"><?=ucwords($item->status_pemeriksaan)?></span>
@@ -241,12 +316,21 @@
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Catatan Lain</label>
 									<textarea id="message" rows="4" name="catatan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
 								</div>
-								<div class="col-span-2">
+								<div class="">
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kasus</label>
 									<select id="kasus" name="kasus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
 										<option value="">Pilih Kasus</option>
 										<option value="Kasus Lama" >Kasus Lama</option>
 										<option value="Kasus Baru" >Kasus Baru</option>
+										
+									</select>
+								</div>
+								<div class="">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kondisi Pulang</label>
+									<select id="kondisi_pulang" name="kondisi_pulang" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+										<option value="">Pilih Kasus</option>
+										<option value="rawat jalan" >Rawat Jalan</option>
+										<option value="dirujuk" >Dirujuk</option>
 										
 									</select>
 								</div>

@@ -31,6 +31,7 @@
 									<th scope="col" class="px-4 py-3">No. JKN</th>
 									<th scope="col" class="px-4 py-3">Nama</th>
 									<th scope="col" class="px-4 py-3">Diagnosa</th>
+									<th scope="col" class="px-4 py-3">Kondisi Pulang</th>
 									<th scope="col" class="px-4 py-3">Status</th>
 									<th scope="col" class="px-4 py-3">
 										<span class="sr-only">Actions</span>
@@ -46,6 +47,7 @@
 										<td class="px-4 py-3"><?=$item->no_jkn != null ? $item->no_jkn : '-'?></td>
 										<td class="px-4 py-3"><?=ucwords($item->name)?></td>
 										<td class="px-4 py-3"><?=ucwords($item->diagnosa_name)?></td>
+										<td class="px-4 py-3"><?=ucwords($item->kondisi_pulang)?></td>
 										<td class="px-4 py-3">
                                             <?php if ($item->status_pemeriksaan == 'sukses') : ?>
                                                 <span class="text-green-400"><?=ucwords($item->status_pemeriksaan)?></span>

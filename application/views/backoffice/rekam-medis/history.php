@@ -105,40 +105,106 @@
 													<hr>
 												</div>
 												<div class="col-span-1 w-full">
-													<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-														<tbody class="border p-4 w-full">
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">Tekanan Darah</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->tekanan_darah?> mmhg</td>
-															</tr>
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">Nadi</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->nadi?> x/menit</td>
-															</tr>
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">Suhu</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->suhu?>  C</td>
-															</tr>
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">RR</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->rr?> x/menit</td>
-															</tr>
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">Tinggi Badan</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->tinggi_badan?> cm</td>
-															</tr>
-															<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
-																<td width="20%" class="p-4">Berat Badan</td>
-																<td width="1%">:</td>
-																<td class="font-bold"><?=$item->berat_badan?> kg</td>
-															</tr>
-														</tbody>
-													</table>
+													<div class="grid grid-cols-2 gap-2">
+														<div>
+															<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+																<tbody class="border p-4 w-full">
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Tekanan Darah</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->tekanan_darah?> mmhg</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Nadi</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->nadi?> x/menit</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Suhu</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->suhu?>  C</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">RR</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->rr?> x/menit</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Tinggi Badan</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->tinggi_badan?> cm</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Berat Badan</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->berat_badan?> kg</td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Status Psikologis</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->status_psikologis?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Skala Nyeri</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->skala_nyeri?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Tingkat Kesadaran</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->tingkat_kesadaran?></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+														<div>
+															<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+																<tbody class="border p-4 w-full">
+																	
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Kulit</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->kulit?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Kepala</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->kepala?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Thorax</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->thorax?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Abdomen</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->abdomen?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Genetalia</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->genetalia?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Ekstremitas Atas</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->ekstremitas_atas?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Ekstremitas Bawah</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->ekstremitas_bawah?></td>
+																	</tr>
+																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
+																		<td width="20%" class="p-4">Spine</td>
+																		<td width="1%">:</td>
+																		<td class="font-bold"><?=$item->spine?></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -156,8 +222,14 @@
 													<input type="text" readonly value="<?=$diagnosa->diganosa_utama_name?>" placeholder="Masukkan No. Rekam Medis" name="no_rm" id="no_rm" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 												</div>
 												<div class="flex">
-													<label for="" class="block mb-2 w-1/2 text-sm font-semibold text-gray-900">Catatan Lain</label>
-													<textarea id="message" readonly rows="4" name="catatan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tidak ada catatan..."><?=$diagnosa->catatan?></textarea>
+													<label for="" class="block w-1/2 mb-2 text-sm font-semibold text-gray-900">Kondisi Pulang</label>
+													<div class="w-full">
+														<select id="kasus" disabled name="kasus" class="bg-gray-100 w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+															<option value="Kasus Lama" <?=$diagnosa->kondisi_pulang == 'rawat jalan' ? "selected" : ""?>>Rawat Jalan</option>
+															<option value="Kasus Baru" <?=$diagnosa->kondisi_pulang == 'dirujuk' ? "selected" : ""?>>Dirujuk</option>
+															
+														</select>
+													</div>
 												</div>
 												<div class="flex">
 													<label for="" class="block w-1/2 mb-2 text-sm font-semibold text-gray-900">Kasus</label>
@@ -169,6 +241,12 @@
 														</select>
 													</div>
 												</div>
+												<div class="flex">
+													<label for="" class="block mb-2 w-1/2 text-sm font-semibold text-gray-900">Catatan Lain</label>
+													<textarea id="message" readonly rows="4" name="catatan" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tidak ada catatan..."><?=$diagnosa->catatan?></textarea>
+												</div>
+												
+												
 												<?php
 													$diagnosa_sekunder = $this->Apotek_model->getRekamDiagnosaByRekamId($diagnosa->id);
 													$obat = $this->Apotek_model->getRekamObatByRekamId($diagnosa->id);
