@@ -276,7 +276,6 @@ class Laporan extends CI_Controller
             $this->load->view('backoffice/laporan/obat', $data);
         }
 	}
-
 	public function laporanObatPDF() {
 		 // init page
 		 $data['current_user'] = $this->auth_model->current_user();
@@ -314,6 +313,126 @@ class Laporan extends CI_Controller
 		 }
 	}
 	public function laporanObatExcel() {
+		// init page
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";
+
+		// form validation
+		$this->form_validation->set_data($this->input->get());
+		$this->form_validation->set_rules('dari', 'Dari', 'required');
+		$this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		$this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		$validation = $this->form_validation;
+
+		if ($validation->run()) {
+			// form variables
+			$status = 'sukses';
+			$dari = $this->input->get('dari');
+			$sampai = $this->input->get('sampai');
+
+			// create obj for filter
+			$filter = new stdClass;
+			if ($dari && $sampai) {
+				$filter->dari = $dari;
+				$filter->sampai = $sampai;
+			}
+
+			// retrieve data
+			$result = $this->Laporan_model->stokObat($filter);
+			$data['data'] = $result;
+
+			$this->load->view('backoffice/laporan/obat_excel',$data);
+		}
+		else {
+			$data['data'] = [];
+			$this->load->view('backoffice/laporan/obat', $data);
+		}
+   }
+
+   public function laporanKesakitan()
+	{
+		// init page
+		$data['current_user'] = $this->auth_model->current_user();
+		$data['title'] = 'Laporan Kesakitan';
+
+		// form validation
+		$this->form_validation->set_data($this->input->get());
+		$this->form_validation->set_rules('dari', 'Dari', 'required');
+		$this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		$this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		$validation = $this->form_validation;
+
+		if ($validation->run()) {
+			$status = 'sukses';
+            $dari = $this->input->get('dari');
+            $sampai = $this->input->get('sampai');
+            $jenis_kelamin = $this->input->get('jenis_kelamin');
+            $jenis_pasien = $this->input->get('jenis_pasien');
+
+            // create obj for filter
+            $filter = new stdClass;
+            if ($dari && $sampai) {
+                $filter->dari = $dari;
+                $filter->sampai = $sampai;
+            }
+            if ($jenis_kelamin)
+                $filter->jenis_kelamin = $jenis_kelamin;
+
+            if ($jenis_pasien)
+                $filter->jenis_pasien = $jenis_pasien;
+            
+            // retrieve data
+            $list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
+			// foreach ($list->list as $key => $value) {
+			// 	echo json_encode($this->Laporan_model->pasienKunjunganBaru($value->jenis_kelamin, $value->tgl_daftar)[0]);
+			// }
+			// echo json_encode($list);
+            $data['data'] = $list;
+			// echo json_encode($data['data']);
+            $this->load->view('backoffice/laporan/kesakitan', $data);
+        }
+        else {
+            $data['data'] = [];
+            $this->load->view('backoffice/laporan/kesakitan', $data);
+        }
+	}
+	public function laporanKesakitanPDF() {
+		 // init page
+		 $data['current_user'] = $this->auth_model->current_user();
+		 $data['title'] = "LAPORAN KESAKITAN";
+ 
+		 // form validation
+		 $this->form_validation->set_data($this->input->get());
+		 $this->form_validation->set_rules('dari', 'Dari', 'required');
+		 $this->form_validation->set_rules('sampai', 'Sampai', 'required');
+		 $this->form_validation->set_message('required', 'Kolom {field} harus diisi.');
+		 $validation = $this->form_validation;
+ 
+		 if ($validation->run()) {
+			 // form variables
+			 $status = 'sukses';
+			 $dari = $this->input->get('dari');
+			 $sampai = $this->input->get('sampai');
+ 
+			 // create obj for filter
+			 $filter = new stdClass;
+			 if ($dari && $sampai) {
+				 $filter->dari = $dari;
+				 $filter->sampai = $sampai;
+			 }
+ 
+			 // retrieve data
+			 $result = $this->Laporan_model->stokObat($filter);
+			 $data['data'] = $result;
+ 
+			 $this->load->view('backoffice/laporan/obat_pdf',$data);
+		 }
+		 else {
+			 $data['data'] = [];
+			 $this->load->view('backoffice/laporan/obat', $data);
+		 }
+	}
+	public function laporanKesakitanExcel() {
 		// init page
 		$data['current_user'] = $this->auth_model->current_user();
 		$data['title'] = "LAPORAN 10 BESAR PENYAKIT";

@@ -82,6 +82,70 @@ class Laporan_model extends CI_Model
 		return $result;
 	}
 
+	public function getByStatusKesakitan($status=null, $filter=null) {
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, 
+			pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, 
+			pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+            $sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+            if ($dari && $sampai) {
+				$this->db->where('DATE(pemeriksaan_pasien.created_at) BETWEEN "'. date('Y-m-d', strtotime($dari)). '" and "'. date('Y-m-d', strtotime($sampai)).'"');
+            }
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+
+		return $data;
+	}
+	public function pasienKunjunganBaruL($filter, $status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		// Total pasien baru
+		$jumlah_kunjungan_baru_l = 0;
+		$this->db->from('pemeriksaan_pasien');
+		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
+		$this->db->select('pasien.name, pasien.nik, pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
+
+		// status where clause
+		if ($status) {
+			$status = strtolower($status);
+			$this->db->where("pemeriksaan_pasien.status_pemeriksaan = '$status'");
+		}
+
+		if ($filter) {
+			// date range where clause
+			$dari = property_exists($filter, 'dari') ? date('Y-m-d', strtotime($filter->dari)) : null;
+			$sampai = property_exists($filter, 'sampai') ? date('Y-m-d', strtotime($filter->sampai)) : null;
+			if ($dari && $sampai)
+				$this->db->where("(date(pemeriksaan_pasien.created_at) BETWEEN '$dari' AND '$sampai')");
+		}
+		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
+		$query = $this->db->get();
+        $data = $query->result();
+		foreach ($data as $value) {
+			if ($value->jenis_kelamin == 'l' && date('d-m-Y', strtotime($value->tgl_daftar)) == date('d-m-Y'))
+				$jumlah_kunjungan_baru_l++;
+		}
+		
+		return $jumlah_kunjungan_baru_l;
+	}
+	public function pasienKunjunganBaruP($status = null, $jenis_kelamin = null, $tgl_daftar = null) {
+		$jumlah_kunjungan_baru_p = 0;
+		if ($jenis_kelamin == 'p' && date('d-m-Y', strtotime($tgl_daftar)) == date('d-m-Y'))
+			$jumlah_kunjungan_baru_p++;
+		return $jumlah_kunjungan_baru_p;
+	}
+
 	public function stokObat($filter=null){
 		$this->db->from($this->_table_rm);
         $this->db->join($this->_table_pemeriksaan,'pemeriksaan_pasien.id = rekam_medis.pemeriksaan_id');

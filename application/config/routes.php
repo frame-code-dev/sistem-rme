@@ -120,6 +120,10 @@ $route['laporan/penyakit/excel'] = 'laporan/penyakitExcel';
 $route['laporan/obat'] = 'laporan/laporanObat';
 $route['laporan/obat/pdf'] = 'laporan/laporanObatPDF';
 $route['laporan/obat/excel'] = 'laporan/laporanObatExcel';
+// Laporan - Kesakitan
+$route['laporan/kesakitan'] = 'laporan/laporanKesakitan';
+$route['laporan/kesakitan/pdf'] = 'laporan/laporanKesakitanPDF';
+$route['laporan/kesakitan/excel'] = 'laporan/laporanKesakitanExcel';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

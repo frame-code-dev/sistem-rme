@@ -114,13 +114,18 @@
 									</div>
 									
 								</div>
-								<div class="grid grid-cols-2 gap-3 col-span-3">
+								<div class="grid grid-cols-3 gap-3 col-span-3">
 									<div>
 										<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Tanggal Lahir<span class="me-2 text-red-500">*</span></label>
 										<input type="text" placeholder="Masukkan Tanggal Lahir" name="tgl_lahir" id="tgl_lahir" datepicker datepicker-format="mm-dd-yyyy" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 										<div class="text-red-500 text-xs italic font-semibold">
 											<?= form_error('tgl_lahir') ?>
 										</div>
+									</div>
+									<div>
+										<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Umur<span class="me-2 text-red-500">*</span></label>
+										<input type="text" placeholder="Masukkan Umur" name="umur" id="umur" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+
 									</div>
 									<div>
 										<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Jenis Kelamin<span class="me-2 text-red-500">*</span></label>
@@ -225,6 +230,21 @@
 	</body>
 	<?php $this->load->view("template/_partials/script") ?>
 	<script>
+		// set umur dari tgl lahir
+		document.addEventListener('DOMContentLoaded', function () {
+            const tgl_lahir = document.getElementById('tgl_lahir');
+            tgl_lahir.addEventListener('changeDate', function (event) {
+                const dob = new Date(event.target.value);
+                const age = calculateAge(dob);
+                document.getElementById('umur').value = age;
+            });
+
+            function calculateAge(dob) {
+                const diffMs = Date.now() - dob.getTime();
+                const ageDt = new Date(diffMs);
+                return Math.abs(ageDt.getUTCFullYear() - 1970);
+            }
+        });
 		$('#jenis_pasien').on('change', function() {
 			if($(this).val() == 'bpjs') {
 				$('#no_jkn').removeClass('hidden');
