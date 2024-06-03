@@ -48,40 +48,7 @@
                             </div>
                         </div>
                     </div>
-					<div class="card bg-white p-5 mt-4 border rounded-md w-full relative overflow-x-auto">
-						<div class="w-full bg-gray-100 p-3 rounded-md mb-5">
-							<h4 class="font-bold text-sm">History Pemeriksaan</h4>
-							<hr>
-						</div>
-						<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="datatable">
-							<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-								<tr>
-									<th class="px-4 py-3">No</th>
-									<th scope="col" class="px-4 py-3">No. RM</th>
-									<th scope="col" class="px-4 py-3">NIK</th>
-									<th scope="col" class="px-4 py-3">No. JKN</th>
-									<th scope="col" class="px-4 py-3">Nama</th>
-									<th scope="col" class="px-4 py-3">Tanggal Lahir</th>
-									<th scope="col" class="px-4 py-3">Alamat</th>
-									<th scope="col" class="px-4 py-3">Status Pasien</th>
-								</tr>
-							</thead>
-							<tbody class="border p-4 w-full">
-								<?php foreach ($log as $key => $item): ?>
-									<tr class="border-b dark:border-gray-700">
-											<td class="px-4 py-3"><?php echo $key + 1; ?></td>
-											<td class="px-4 py-3"><?=ucwords($item->no_rm)?></td>
-											<td class="px-4 py-3"><?=ucwords($item->nik)?></td>
-											<td class="px-4 py-3"><?=$item->no_jkn != null ? $item->no_jkn : '-'?></td>
-											<td class="px-4 py-3"><?=ucwords($item->name)?></td>
-											<td class="px-4 py-3"><?=ucwords($item->tanggal_lahir)?></td>
-											<td class="px-4 py-3"><?=ucwords($item->alamat)?></td>
-											<td class="px-4 py-3"><?php echo $item->status ?></td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
+					
 				</section>
 			</div>
 		</div>

@@ -30,7 +30,7 @@
 						<h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Welcome Back</h1>
 						<h5 class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Puskesmas Kalisat Jember</h5>
 					</div>
-					<img src="<?=base_url('public/assets/background.png')?>" class="w-fit h-fit mx-auto align-" alt="">
+					<img src="<?=base_url('public/assets/bag.jpg')?>" class="w-fit h-fit rounded border border-2 border-gray-300 mx-auto align-" alt="">
 				</div>
 				<div class="relative flex flex-col justify-center overflow-hidden p-4 bg-blue-100 dark:bg-gray-800 sm:p-6 lg:p-8 h-screen space-y-4">
 						<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
