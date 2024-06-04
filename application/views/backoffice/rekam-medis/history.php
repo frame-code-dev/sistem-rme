@@ -106,7 +106,7 @@
 												</div>
 												<div class="col-span-1 w-full">
 													<div class="grid grid-cols-2 gap-2">
-														<div>
+														<div class="relative overflow-x-auto">
 															<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 																<tbody class="border p-4 w-full">
 																	<tr class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border">
@@ -157,7 +157,7 @@
 																</tbody>
 															</table>
 														</div>
-														<div>
+														<div class="relative overflow-x-auto">
 															<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 																<tbody class="border p-4 w-full">
 																	
