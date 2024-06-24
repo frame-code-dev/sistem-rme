@@ -58,6 +58,7 @@ class Nomor_antrian extends CI_Controller {
 		$update->updateDataAntrian($id);
 		$this->db->insert('pemeriksaan_pasien',[
 			'pasien_id' => $id,
+			'created_at' => date('Y-m-d H:i:s'),
 		]);
 		// Log 
 		$nama = $this->Pasien_model->getById($id)->name;

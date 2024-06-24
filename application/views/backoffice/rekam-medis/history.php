@@ -53,14 +53,28 @@
 						</table>
 					</div>
 					<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">
-						<div class="w-full bg-gray-100 p-3 rounded-md mb-5">
-							<h4 class="font-bold text-sm">Riwayat Pemeriksaan</h4>
-							<hr>
+						<div class="w-full bg-gray-100 p-3 rounded-md mb-5 flex justify-between">
+							<div>
+								<h4 class="font-bold text-sm">Riwayat Pemeriksaan</h4>
+							</div>
+							
 						</div>
 						<?php foreach ($history_pemeriksaan as $key => $item): ?>
 							<div class="mt-4">
 								<div class="bg-blue-100 p-2">
-									<b class="text-xs">Tanggal : <?=$item->created_at?> </b>
+									<div class="flex justify-between content-center">
+										<div class="align-middle">
+											<b class="text-xs">Tanggal : <?=$item->created_at?> </b>
+										</div>
+										<div>
+											<a href="<?=base_url('rekam-medis/cetak-pemeriksaan/'.$item->id)?>" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2">
+												<svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+													<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 17v-5h1.5a1.5 1.5 0 1 1 0 3H5m12 2v-5h2m-2 3h2M5 10V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1v6M5 19v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1M10 3v4a1 1 0 0 1-1 1H5m6 4v5h1.375A1.627 1.627 0 0 0 14 15.375v-1.75A1.627 1.627 0 0 0 12.375 12H11Z"/>
+												</svg>
+												Cetak Rekam Medis
+											</a>
+										</div>
+									</div>
 									<div class="grid grid-cols-1 gap-2">
 										<div class="grid grid-cols-2 gap-4">
 											<div class="card bg-white p-5 mt-4 border rounded-md w-full relative">

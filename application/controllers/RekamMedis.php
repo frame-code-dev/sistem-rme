@@ -83,4 +83,23 @@ class RekamMedis extends CI_Controller
 		$obat = $this->Obat_model->getAll();
 		echo json_encode($obat);
 	}
+
+	public function riwayat_pemeriksaan($id) {
+		$data['data'] = $this->Rekam_model->getById($id);
+		$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
+		$data['obat'] = $this->Obat_model->getAll();
+		$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
+		$data['title'] = 'RESUME MEDIS';
+		$data['current_user'] = $this->auth_model->current_user();
+		$this->load->view('backoffice/rekam-medis/pdf', $data);
+	}
+	public function cetak_pemeriksaan($id) {
+		$data['data'] = $this->Rekam_model->getByIdSukses($id);
+		$data['pasien'] = $this->Pasien_model->getById($data['data']->pasien_id);
+		$data['obat'] = $this->Obat_model->getAll();
+		$data['history_diagnosa'] = $this->Apotek_model->getDiagnosaById($data['data']->pasien_id);
+		$data['title'] = 'RESUME MEDIS';
+		$data['current_user'] = $this->auth_model->current_user();
+		$this->load->view('backoffice/rekam-medis/pdf-history', $data);
+	}
 }

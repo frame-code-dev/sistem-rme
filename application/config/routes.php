@@ -100,6 +100,8 @@ $route['rekam-medis/create/(:any)'] = 'rekammedis/create/$1';
 $route['rekam-medis/data-obat'] = 'rekammedis/dataobat';
 $route['rekam-medis/store/(:any)'] = 'rekammedis/store/$1';
 $route['rekam-medis/history/(:any)'] = 'rekammedis/history/$1';
+$route['rekam-medis/riwayat-pemeriksaan/(:any)'] = 'rekammedis/riwayat_pemeriksaan/$1';
+$route['rekam-medis/cetak-pemeriksaan/(:any)'] = 'rekammedis/cetak_pemeriksaan/$1';
 
 // Apotek
 $route['apotek'] = 'apotek/index';
