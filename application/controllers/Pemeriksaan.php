@@ -68,6 +68,7 @@ class Pemeriksaan extends CI_Controller
         $validation->set_rules($pemeriksaan->rules());
 
         if ($validation->run()) {
+			$pemeriksaan->save();
             $this->session->set_flashdata('message', 'Berhasil melakukan pemeriksaan.');
 			redirect('rekam-medis/create/' . $this->input->post()['id']);
         }
