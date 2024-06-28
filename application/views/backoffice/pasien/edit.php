@@ -110,7 +110,7 @@
 													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
 												</figure>
 											</div>
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto Kartu JKN<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto Kartu JKN
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_jkn" aria-describedby="file_input_help"
 												id="file_jkn"
 												type="file"
@@ -202,7 +202,7 @@
 													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
 												</figure>
 											</div>
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KTP<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KTP
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_ktp" aria-describedby="file_input_help"
 												id="file_ktp"
 												type="file"
@@ -215,7 +215,7 @@
 													<figcaption class="mt-2 text-sm text-start text-gray-500 dark:text-gray-400">Image Preview</figcaption>
 												</figure>
 											</div>
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KK<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KK
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_kk" aria-describedby="file_input_help"
 												id="file_kk"
 												type="file"

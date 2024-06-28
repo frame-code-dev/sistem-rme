@@ -103,7 +103,7 @@
 									<?php foreach ($data as $key => $value): ?>
 										<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
 											<td class="border p-2 text-xs"><?=$key+1?></td>
-											<td class="border p-2 text-xs"><?=date('d-m-Y', strtotime($value->tgl_daftar))?></td>
+											<td class="border p-2 text-xs"><?=date('d-m-Y', strtotime($value->created_at))?></td>
 											<?php
 												$dari = $this->input->get('dari');
 												$sampai = $this->input->get('sampai');

@@ -27,15 +27,15 @@
 					
 					</div>
 					<div class="text-center">
-						<h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Welcome Back</h1>
-						<h5 class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Puskesmas Kalisat Jember</h5>
+						<h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Selamat datang</h1>
+						<h5 class="mb-8 text-lg font-medium text-gray-500 md:text-5xl lg:text-6xl dark:text-gray-400">Puskesmas Kalisat Jember</h5>
 					</div>
 					<img src="<?=base_url('public/assets/bag.jpg')?>" class="w-fit h-fit rounded border border-2 border-gray-300 mx-auto align-" alt="">
 				</div>
 				<div class="relative flex flex-col justify-center overflow-hidden p-4 bg-blue-100 dark:bg-gray-800 sm:p-6 lg:p-8 h-screen space-y-4">
 						<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 							<h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-								Sign in to your account
+								Silahkan masuk ke akun anda
 							</h1>
 							<form class="space-y-4 md:space-y-6" action="#" method="POST">
 								<?php if($this->session->flashdata('message_login_error')): ?>
@@ -63,7 +63,7 @@
 											<input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 focus:bg-white dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required="">
 										</div>
 										<div class="ml-3 text-sm">
-											<label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
+											<label for="remember" class="text-gray-500 dark:text-gray-300">Ingat saya</label>
 										</div>
 									</div>
 								</div>

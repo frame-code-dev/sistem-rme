@@ -45,7 +45,7 @@ class Pasien_model extends CI_Model
 			[
 				'field' => 'no_kk',
 				'label' => 'No. KK',
-				'rules' => 'required|is_unique[pasien.no_kk]|max_length[16]|min_length[16]'
+				'rules' => 'required'
 				
 			],
 			[

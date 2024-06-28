@@ -105,7 +105,7 @@
 											</div>
 										</div>
 										<div class="">
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto Kartu JKN<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto Kartu JKN
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_input" aria-describedby="file_input_help"
 												id="file_jkn"
 												type="file"
@@ -179,6 +179,7 @@
 									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Pendidikan <span class="me-2 text-red-500">*</span></label>
 									<select id="pendidikan" name="pendidikan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 										<option value="0">Pilih Pendidikan</option>
+										<option value="sd" >SD</option>
 										<option value="sltp" >SLTP</option>
 										<option value="slta" >SLTA</option>
 										<option value="d1" >D1</option>
@@ -197,14 +198,14 @@
 								<div class="col-span-3">
 									<div class="grid grid-cols-2 gap-3">
 										<div class="">
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KTP<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KTP
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_input" aria-describedby="file_input_help"
 												id="file_ktp"
 												type="file"
 												name="file_ktp">
 										</div>
 										<div class="">
-											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KK<span class="me-2 text-red-500">*</span></label>
+											<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Foto KK
 											<input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 file_input" aria-describedby="file_input_help"
 												id="file_kk"
 												type="file"

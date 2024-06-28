@@ -65,7 +65,7 @@
 										<?=$count_perawat?>
 										</h2>
 										<p class="text-gray-500 text-sm tracking-tighter">
-											Pengguna Perawat
+											Pengguna Apoteker
 										</p>
 									</div>
 								</div>

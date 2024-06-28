@@ -384,6 +384,7 @@ class Laporan extends CI_Controller
             // retrieve data
             $list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
             $data['data'] = $list;
+        
             $this->load->view('backoffice/laporan/kesakitan', $data);
         }
         else {
@@ -419,7 +420,7 @@ class Laporan extends CI_Controller
 			 // retrieve data
 			 $list = $this->Laporan_model->getByStatusKesakitan($status, $filter);
 			 $data['data'] = $list;
- 
+        
 			 $this->load->view('backoffice/laporan/kesakitan_pdf',$data);
 		 }
 		 else {

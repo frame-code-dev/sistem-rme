@@ -38,7 +38,7 @@
                         <div class="container bg-green-400 p-5 mt-4 border rounded-md w-full relative overflow-x-auto center">
                             <div class="text-center text-white">
                             <p class="font-bold text-5xl"><?=$total_diperiksa?></p>
-                            <p class="text-2xl mt-5">Jumlah Pasien Yang Sedang Dilayani</p>
+                            <p class="text-2xl mt-5">Jumlah Pasien Yang Dilayani</p>
                             </div>
                         </div>
                         <div class="container bg-blue-400 p-5 mt-4 border rounded-md w-full relative overflow-x-auto center">

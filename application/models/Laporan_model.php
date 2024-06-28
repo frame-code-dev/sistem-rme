@@ -87,8 +87,9 @@ class Laporan_model extends CI_Model
 		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
 		$this->db->select('pasien.name, pasien.nik, 
 			pasien.no_rm, pasien.jenis_pasien, pasien.tanggal_lahir, 
-			pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*');
-
+			pasien.jenis_kelamin, pasien.alamat, pasien.created_at AS tgl_daftar, pemeriksaan_pasien.*, DATE_FORMAT(pemeriksaan_pasien.created_at, "%Y-%m-%d") AS created_at_ymd'
+			);	
+	
 		// status where clause
 		if ($status) {
 			$status = strtolower($status);
@@ -103,7 +104,7 @@ class Laporan_model extends CI_Model
 				$this->db->where('DATE(pemeriksaan_pasien.created_at) BETWEEN "'. date('Y-m-d', strtotime($dari)). '" and "'. date('Y-m-d', strtotime($sampai)).'"');
             }
 		}
-		$this->db->group_by('pemeriksaan_pasien.pasien_id');
+		$this->db->group_by(array('created_at_ymd'));
 		$this->db->order_by('pemeriksaan_pasien.created_at', 'asc');
 		$query = $this->db->get();
         $data = $query->result();

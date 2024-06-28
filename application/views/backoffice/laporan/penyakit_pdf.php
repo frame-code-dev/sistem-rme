@@ -123,7 +123,7 @@
                         <a href="<?=base_url('laporan/kunjungan/penyakit')?>" class="btn btn-primary no-print"></i> Kembali</a>
                     </div>
                     <div class="mt-5">
-                        <h4 class="fw-bold">Periode : <?=date('d M Y', strtotime($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></h4>
+                        <h4 class="fw-bold">Periode : <?=date('d M Y', ($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></h4>
                     </div>
                     <table id="customers">
                         <thead>
@@ -149,6 +149,23 @@
             </div>
         </div>
     </body>
+    <div class="d-flex justify-content-end mt-3">
+			<table>
+				<tr>
+					<td>Jember, <?=date('d m Y')?></td>
+				</tr>
+				<tr>
+					<td class="text-center">Nama dan Tanda Tangan DPJP</td>
+				</tr>
+				<tr>
+					<td class="p-5"></td>
+				</tr>
+				<tr>
+					<td class=" text-center">……………………………….</td>
+				</tr>
+			</table>
+
+		</div>
     <script>
         print();
     </script>

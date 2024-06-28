@@ -95,13 +95,12 @@
 						<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 							<tbody class=" p-4 w-full">
 								<tr class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-									<td width="20%" class="p-2">UPT / Puskesmas </td>
-									<td width="1%">:</td>
+									<td width="20%" class="p-2">UPT / Puskesmas Kalisat</td>
 									<td class="font-bold"></td>
 								</tr>
 								<tr class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
 									<td width="20%" class="p-2">Pelaporan Bulan/Periode </td>
-									<td width="1%">:</td>
+									<td width="1%">: </td>
 									<td class="font-bold"> <?=date('d M Y', strtotime($_GET['dari']))?> s/d <?=date('d M Y', strtotime($_GET['sampai']))?></td>
 								</tr>
 								<tr class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
