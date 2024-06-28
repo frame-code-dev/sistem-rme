@@ -88,4 +88,11 @@ class Obat_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update($this->_table);
     }
+
+	public function stokObat(){
+		$this->db->from($this->_table);
+		$this->db->where('stok <', 50);
+		$q = $this->db->get();
+		return $q->result();
+	}
 }

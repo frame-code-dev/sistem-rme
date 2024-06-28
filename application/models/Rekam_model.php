@@ -5,6 +5,7 @@ class Rekam_model extends CI_Model
 	private $_table = "rekam_medis";
 	private $_table_rekam_medis_diagnosa = 'rekam_medis_diagnosa';
 	private $_table_rekam_medis_obat = 'rekam_medis_obat';
+	private $_table_pemeriksaan = 'pemeriksaan_pasien';
    	public function getAll(){
 		$this->db->from('pemeriksaan_pasien');
 		$this->db->join('pasien', 'pasien.id = pemeriksaan_pasien.pasien_id');
@@ -77,6 +78,15 @@ class Rekam_model extends CI_Model
 	public function is_diagnosis_exists($id) {
 		$this->db->where('pemeriksaan_id', $id);
         $query = $this->db->get($this->_table);
+
+        // Check if there is any row returned
+        return $query->num_rows() > 0;
+	}
+
+	public function is_pemeriksaan_exists($id) {
+		$this->db->where('id', $id);
+		$this->db->where('pemeriksaan_pasien.keluhan_utama',null);
+        $query = $this->db->get($this->_table_pemeriksaan);
 
         // Check if there is any row returned
         return $query->num_rows() > 0;

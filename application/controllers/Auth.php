@@ -11,6 +11,7 @@ class Auth extends CI_Controller
 		
 		$this->load->model('auth_model');
 		$this->load->library('form_validation');
+				//    file -> function 
 		if ($this->auth_model->current_user()) {
 			redirect('dashboard');
 		}

@@ -87,6 +87,7 @@
 										Data Obat
 									</a>
 								</li>
+								
 								<?php
 							} ?>
 						  
@@ -108,15 +109,6 @@
 			<?php } ?>	
 			<?php
 				if ($current_user->role == 'dokter' || $current_user->role == 'admin') {?>
-					<li>
-						<a href="<?=base_url('pemeriksaan')?>" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-						<svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z"/>
-						</svg>
-						<span class="ms-3 text-sm">Pemeriksaan</span>
-						</a>
-					</li>
-					<hr>
 					<li>
 						<a href="<?=base_url('rekam-medis')?>" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 						<svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -163,6 +155,14 @@
 								Laporan Kunjungan
 								</a>
 							</li>
+						<li>
+							<a href="<?=base_url('laporan/kesakitan')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
+								<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4"/>
+								</svg>
+								Laporan Kesakitan
+							</a>
+						</li>
 					<?php
 					} ?>
 					<?php
@@ -187,8 +187,6 @@
 							Laporan Obat
 						</a>
 						</li>
-					
-					<?php } ?>
 						<li>
 							<a href="<?=base_url('laporan/kesakitan')?>" class="text-sm flex items-center w-full p-2 text-gray-900 transition duration-75 pl-4 group hover:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-700">
 								<svg class="w-4 h-4 text-gray-900 dark:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -197,6 +195,8 @@
 								Laporan Kesakitan
 							</a>
 						</li>
+					<?php } ?>
+						
                 </ul>
             </li>
 			

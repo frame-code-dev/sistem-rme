@@ -59,6 +59,7 @@ class Pasien extends CI_Controller
 		$data['no_antrian'] = $no_antrian;
 
 		$tambah = $this->Pasien_model;
+		// memanggil library form validation 
         $validation = $this->form_validation;
         $validation->set_rules($tambah->rules());
         if ($validation->run()) {
