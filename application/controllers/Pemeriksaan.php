@@ -13,6 +13,9 @@ class Pemeriksaan extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('auth_model');
 		$this->load->model('Log_Model');
+		$this->load->model('Rekam_model');
+		$this->load->model('Obat_model');
+		$this->load->model('Apotek_model');
 		if(!$this->auth_model->current_user()){
 			redirect('auth/login');
 		}
@@ -45,8 +48,8 @@ class Pemeriksaan extends CI_Controller
     {
         if (!isset($id)) redirect('pemeriksaan');
 
-		$data['title'] = 'Pemeriksaan';
-		$data['current_page'] = 'List Pemeriksaan';
+		$data['title'] = 'Rekam Medis';
+		$data['current_page'] = 'List Rekam Medis';
 		$data['current_pemeriksaan'] = $this->Pemeriksaan_model->getById($id);
 		$data['current_user'] = $this->auth_model->current_user();
 		$data['pasien'] = $this->Pasien_model->getById($data['current_pemeriksaan']->pasien_id);
@@ -65,9 +68,8 @@ class Pemeriksaan extends CI_Controller
         $validation->set_rules($pemeriksaan->rules());
 
         if ($validation->run()) {
-            $pemeriksaan->save();
             $this->session->set_flashdata('message', 'Berhasil melakukan pemeriksaan.');
-			redirect('pemeriksaan/list');
+			redirect('rekam-medis/create/' . $this->input->post()['id']);
         }
         else {
             $data['pasien'] = $this->Pasien_model->getById($this->input->post()['pasien_id']);

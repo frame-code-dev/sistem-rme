@@ -1,6 +1,7 @@
 <html lang="">
     <head>
 		<?php $this->load->view("template/_partials/head") ?>
+		
     </head>
     <body class=" text-gray-900">
 		<?php $this->load->view("template/_partials/topbar") ?>
@@ -296,20 +297,18 @@
 							<input type="text" name="pemeriksaan_id" value="<?=$data->id?>" hidden>
 							<div class="grid grid-cols-2 gap-3">
 								<div class="col-span-2">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kode Diagnosa<span class="me-2 text-red-500">*</span></label>
-									<input type="text"  placeholder="Masukkan Kode Diagnosa" name="diganosa_utama_code" onkeyup="getDiagnosis()" id="diagnosa_utama_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('diganosa_utama_code') ?>
-									</div>
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Deskripsi Diagnosa<span class="me-2 text-red-500">*</span></label>
+									<select class="select2" name="" class="w-full browser-default bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></select>
 									<div id="loadingMessage" class="text-blue-500 text-xs italic font-semibold" style="display: none;">
 										Data sedang dimuat...
 									</div>
 								</div>
 								<div class="col-span-2">
-									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Deskripsi Diagnosa<span class="me-2 text-red-500">*</span></label>
-									<input type="text"  placeholder="Masukkan Deskripsi Diagnosa" name="diganosa_utama_name" id="diagnosa_utama_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kode Diagnosa<span class="me-2 text-red-500">*</span></label>
+									<input type="hidden" name="diganosa_utama_name" class="diganosa_utama_name" id="">
+									<input type="text"  placeholder="Masukkan Kode Diagnosa" name="diganosa_utama_code" id="diagnosa_utama_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 									<div class="text-red-500 text-xs italic font-semibold">
-										<?= form_error('diganosa_utama_name') ?>
+										<?= form_error('diganosa_utama_code') ?>
 									</div>
 								</div>
 								<div class="col-span-2">
@@ -407,12 +406,16 @@
 								<div>
 									<button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Simpan</button>
 								</div>
+
 								<div>
 									<button class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" type="reset">Batal</button>
 								</div>
 
 							</div>
 						</form>
+						<div class="w-full">
+						</div>
+
 					</div>
 				</section>
 			</div>
@@ -477,13 +480,59 @@
         });
     </script>
 	<script>
+		$('.select2').select2({
+			width: 'resolve',
+			placeholer: 'Cari Diagnosa',
+			ajax: {
+				// url: ``,
+				url: function (params) {
+
+					console.log(params.term);
+					return `https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name` 
+					// &terms=${params.term}
+				},
+				data: function (params) {
+					var query = {
+						terms: params.term,
+						// type: 'public'
+					}
+
+					// Query parameters will be ?search=[term]&type=public
+					return query;
+				},
+				processResults: function (data) {
+					return {
+						results: data[3].map(function (item) {
+							return {
+								id: item[0], // Assuming the first item in the array is the ID
+								text: item[1] // Assuming the second item in the array is the text
+							};
+						})
+					};
+				}
+			},
+			templateResult: function (data) {
+				if (data.loading) {
+					return data.text;
+				}
+				return `${data.id} - ${data.text}`;
+			},
+			templateSelection: function (data) {
+				$('.diganosa_utama_name').val(data.text);
+				$('#diagnosa_utama_code').val(data.id);
+				return data.text || data.id;
+			}
+		});
+	</script>
+	<script>
 		function getDiagnosis(){
 			var getCode = document.getElementById('diagnosa_utama_code').value;
 			var getDesc = document.getElementById('diagnosa_utama_name');
 			var loadingMessage = document.getElementById('loadingMessage');
 
 			$.ajax({
-				url: 'http://icd10api.com/?code='+getCode+'&desc=short&r=json',
+				// url: 'http://icd10api.com/?code='+getCode+'&desc=short&r=json',
+				url: ``,
 				type: 'GET',
 				dataType: 'JSON',
 				beforeSend: function() {
@@ -491,6 +540,7 @@
 					loadingMessage.style.display = 'block';
 				},
 				success: function(data){
+					console.log(data);
 					if (data.Response == 'False') {
 						loadingMessage.style.display = 'block';
 						
@@ -522,8 +572,12 @@
 			});
 		}
 		var room = 1;
-		$('#panel_fields_button').click(function(){
+		var te = 0;
+		$('#panel_fields_button').click(function(e){
+			e.preventDefault();
 			panel_fields()
+			refreshSelect();
+
 		})
 		function panel_fields(){
 				room++;
@@ -535,14 +589,14 @@
 				<div class="grid mt-5 grid-cols-2 gap-5 xl:grid-cols-1">
 					<div>
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Kode Diagnosa Lainnya:<span class="me-2 text-red-500">*</span></label>
-						<input required type="text" id="code_diagnosis_other-${room}" onkeyup="getDiagnosisOther(this, ${room})" name="code_diagnosis_other[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Diagnosa Lainnya" value="">
-						<span class="pl-1 text-xs text-red-600 text-bold"></span>
+						<select class="select2"  name="" class="w-full browser-default bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></select>
+						<input type="hidden" name="description_diagnosis_other[]" id="description_diagnosis_other-${room}" class="code_diagnosis_other-${room}">
 					</div>
 					<div>
 						<label for="" class="block mb-2 text-sm font-semibold text-gray-900">Deskripsi Diagnosa Lainnya:<span class="me-2 text-red-500">*</span></label>
 						<div class="flex">
 							<div class="w-full">
-								<input required type="text" id="description_diagnosis_other-${room}" name="description_diagnosis_other[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Deskripsi Diagnosa Lainnya" value="">
+								<input required type="text" id="code_diagnosis_other-${room}" name="code_diagnosis_other[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Deskripsi Diagnosa Lainnya" value="">
 							</div>
 							<div class="ms-2">
 								<button type="button" class="bg-white text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onclick="remove_panel_fields(${room})">Hapus</button>
@@ -553,6 +607,53 @@
 				
 				objTo.appendChild(divtest)
 				
+		}
+		function refreshSelect(){
+			te++
+			console.log(room);
+			$('.select2').select2({
+				width: 'resolve',
+				placeholer: 'Cari Diagnosa',
+				ajax: {
+					// url: ``,
+					url: function (params) {
+
+						console.log(params.term);
+						return `https://clinicaltables.nlm.nih.gov/api/icd10cm/v3/search?sf=code,name` 
+						// &terms=${params.term}
+					},
+					data: function (params) {
+						var query = {
+							terms: params.term,
+							// type: 'public'
+						}
+
+						// Query parameters will be ?search=[term]&type=public
+						return query;
+					},
+					processResults: function (data) {
+						return {
+							results: data[3].map(function (item) {
+								return {
+									id: item[0], // Assuming the first item in the array is the ID
+									text: item[1] // Assuming the second item in the array is the text
+								};
+							})
+						};
+					}
+				},
+				templateResult: function (data) {
+					if (data.loading) {
+						return data.text;
+					}
+					return `${data.id} - ${data.text}`;
+				},
+				templateSelection: function (data) {
+					$(`#description_diagnosis_other-${room}`).val(data.text);
+					$(`#code_diagnosis_other-${room}`).val(data.id);
+					return data.text || data.id;
+				}
+			});
 		}
 		function remove_panel_fields(rid) {
 			$('.removeclass'+rid).remove();
@@ -632,3 +733,5 @@
         });
     </script>
 </html>
+<!-- // <input required type="text" id="code_diagnosis_other-${room}" onkeyup="getDiagnosisOther(this, ${room})" name="code_diagnosis_other[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Kode Diagnosa Lainnya" value="">
+// <span class="pl-1 text-xs text-red-600 text-bold"></span> -->

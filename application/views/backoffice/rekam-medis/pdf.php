@@ -210,11 +210,11 @@
 									<?php if ($diagnosa_sekunder != null || $obat != null) {?>
 										<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white border">
 											<td width="10%" class="border px-3">Diagnosa Sekunder</td>
-											<td class="font-bold px-3 "><?php foreach ($diagnosa_sekunder as $key => $value) { echo $value->name.'-'.$value->code.',';}?></td>
+											<td class="font-bold px-3 " colspan="5"><?php foreach ($diagnosa_sekunder as $key => $value) { echo $value->name.'-'.$value->code.',';}?></td>
 										</tr>
 										<tr class=" font-medium text-gray-900 whitespace-nowrap dark:text-white border">
 											<td width="10%" class="border px-3">Obat yang diberikan </td>
-											<td class="font-bold px-3 "><?php foreach ($obat as $key => $value) { echo 'Obat: '.$value->name.' - Qty : '.$value->qty.',';}?></td>
+											<td class="font-bold px-3 " colspan="5"><?php foreach ($obat as $key => $value) { echo 'Obat: '.$value->name.' - Qty : '.$value->qty.',';}?></td>
 										</tr>
 									<?php } ?>
 								</tbody>

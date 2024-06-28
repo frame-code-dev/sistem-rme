@@ -120,4 +120,16 @@ class Apotek_model extends CI_Model
 
         return $data;
     }
+	public function DiagnosaList()
+    {
+        $this->db->from($this->_table_rm);
+		$this->db->select('rekam_medis.*,');
+		$this->db->select('COUNT(rekam_medis.diganosa_utama_code) AS jumlah');
+		$this->db->group_by('rekam_medis.diganosa_utama_code');
+		$this->db->order_by('jumlah', 'desc');
+        $query = $this->db->get();
+        $data = $query->result();
+
+        return $data;
+    }
 }

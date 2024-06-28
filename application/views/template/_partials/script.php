@@ -6,6 +6,8 @@
 <script src="https://cdn.datatables.net/2.0.1/js/dataTables.tailwindcss.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
 	 $(document).ready(function() {
 		$('.file_input').change(function () {
